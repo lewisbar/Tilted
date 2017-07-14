@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3089B76E1F1807E200F7AAFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B76D1F1807E200F7AAFD /* AppDelegate.swift */; };
-		3089B7701F1807E200F7AAFD /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B76F1F1807E200F7AAFD /* GameScene.sks */; };
-		3089B7721F1807E200F7AAFD /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7711F1807E200F7AAFD /* Actions.sks */; };
 		3089B7741F1807E200F7AAFD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7731F1807E200F7AAFD /* GameScene.swift */; };
 		3089B7761F1807E200F7AAFD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7751F1807E200F7AAFD /* GameViewController.swift */; };
 		3089B7791F1807E200F7AAFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7771F1807E200F7AAFD /* Main.storyboard */; };
@@ -17,6 +15,7 @@
 		3089B77E1F1807E200F7AAFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3089B77C1F1807E200F7AAFD /* LaunchScreen.storyboard */; };
 		3089B7891F1807E300F7AAFD /* TiltedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7881F1807E300F7AAFD /* TiltedTests.swift */; };
 		3089B7941F1807E300F7AAFD /* TiltedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7931F1807E300F7AAFD /* TiltedUITests.swift */; };
+		3089B7A21F1965BE00F7AAFD /* CGSize+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +38,6 @@
 /* Begin PBXFileReference section */
 		3089B76A1F1807E200F7AAFD /* Tilted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tilted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3089B76D1F1807E200F7AAFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3089B76F1F1807E200F7AAFD /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		3089B7711F1807E200F7AAFD /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		3089B7731F1807E200F7AAFD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		3089B7751F1807E200F7AAFD /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		3089B7781F1807E200F7AAFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -53,6 +50,7 @@
 		3089B78F1F1807E300F7AAFD /* TiltedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TiltedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3089B7931F1807E300F7AAFD /* TiltedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltedUITests.swift; sourceTree = "<group>"; };
 		3089B7951F1807E300F7AAFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,10 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				3089B76D1F1807E200F7AAFD /* AppDelegate.swift */,
-				3089B76F1F1807E200F7AAFD /* GameScene.sks */,
-				3089B7711F1807E200F7AAFD /* Actions.sks */,
 				3089B7731F1807E200F7AAFD /* GameScene.swift */,
 				3089B7751F1807E200F7AAFD /* GameViewController.swift */,
+				3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */,
 				3089B7771F1807E200F7AAFD /* Main.storyboard */,
 				3089B77A1F1807E200F7AAFD /* Assets.xcassets */,
 				3089B77C1F1807E200F7AAFD /* LaunchScreen.storyboard */,
@@ -239,10 +236,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3089B7791F1807E200F7AAFD /* Main.storyboard in Resources */,
-				3089B7701F1807E200F7AAFD /* GameScene.sks in Resources */,
 				3089B77B1F1807E200F7AAFD /* Assets.xcassets in Resources */,
 				3089B77E1F1807E200F7AAFD /* LaunchScreen.storyboard in Resources */,
-				3089B7721F1807E200F7AAFD /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +264,7 @@
 			files = (
 				3089B7741F1807E200F7AAFD /* GameScene.swift in Sources */,
 				3089B7761F1807E200F7AAFD /* GameViewController.swift in Sources */,
+				3089B7A21F1965BE00F7AAFD /* CGSize+Extension.swift in Sources */,
 				3089B76E1F1807E200F7AAFD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +433,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9SPL76B3GR;
 				INFOPLIST_FILE = Tilted/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.lennartwisbar.Tilted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -451,6 +448,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9SPL76B3GR;
 				INFOPLIST_FILE = Tilted/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.lennartwisbar.Tilted;
 				PRODUCT_NAME = "$(TARGET_NAME)";
