@@ -16,6 +16,7 @@
 		3089B7891F1807E300F7AAFD /* TiltedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7881F1807E300F7AAFD /* TiltedTests.swift */; };
 		3089B7941F1807E300F7AAFD /* TiltedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7931F1807E300F7AAFD /* TiltedUITests.swift */; };
 		3089B7A21F1965BE00F7AAFD /* CGSize+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */; };
+		3089B7A41F19771D00F7AAFD /* MovingBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7A31F19771D00F7AAFD /* MovingBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		3089B7931F1807E300F7AAFD /* TiltedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiltedUITests.swift; sourceTree = "<group>"; };
 		3089B7951F1807E300F7AAFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extension.swift"; sourceTree = "<group>"; };
+		3089B7A31F19771D00F7AAFD /* MovingBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				3089B76D1F1807E200F7AAFD /* AppDelegate.swift */,
 				3089B7731F1807E200F7AAFD /* GameScene.swift */,
+				3089B7A31F19771D00F7AAFD /* MovingBackground.swift */,
 				3089B7751F1807E200F7AAFD /* GameViewController.swift */,
 				3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */,
 				3089B7771F1807E200F7AAFD /* Main.storyboard */,
@@ -266,6 +269,7 @@
 				3089B7761F1807E200F7AAFD /* GameViewController.swift in Sources */,
 				3089B7A21F1965BE00F7AAFD /* CGSize+Extension.swift in Sources */,
 				3089B76E1F1807E200F7AAFD /* AppDelegate.swift in Sources */,
+				3089B7A41F19771D00F7AAFD /* MovingBackground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
