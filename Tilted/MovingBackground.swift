@@ -9,7 +9,8 @@
 import SpriteKit
 
 struct MovingBackground {
-    static func setup(in scene: SKScene) {
+    
+    static func setup(in scene: SKScene) -> [SKSpriteNode] {
         let backgroundBottomRight = SKSpriteNode(imageNamed: "Background")
         let backgroundBottomLeft = SKSpriteNode(imageNamed: "Background")
         let backgroundTopRight = SKSpriteNode(imageNamed: "Background")
@@ -41,5 +42,7 @@ struct MovingBackground {
             
             background.run(moveCycle)
         }
+        
+        return backgrounds
     }
 }

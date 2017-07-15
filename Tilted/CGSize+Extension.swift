@@ -9,6 +9,7 @@
 import UIKit
 
 extension CGSize {
+    
     var center: CGPoint {
         return CGPoint(x: self.width / 2, y: self.height / 2)
     }
@@ -27,5 +28,13 @@ extension CGSize {
     
     var bottomRight: CGPoint {
         return CGPoint(x: self.width, y: 0)
+    }
+    
+    // Returns radians
+    func lowerRightAngleOverDiagonal() -> CGFloat {
+        let a = width
+        let b = height
+        let c = sqrt(a * a + b * b)
+        return asin(a / c)
     }
 }
