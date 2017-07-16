@@ -20,6 +20,7 @@
 		3089B7A81F1A1E9000F7AAFD /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7A71F1A1E9000F7AAFD /* Sprite.swift */; };
 		3089B7AB1F1AC20000F7AAFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7A91F1AC13100F7AAFD /* Main.storyboard */; };
 		3089B7AD1F1ADB1000F7AAFD /* ExhaustFlame.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */; };
+		3089B7AF1F1BC1E200F7AAFD /* Shot.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7AE1F1BC1E200F7AAFD /* Shot.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		3089B7A71F1A1E9000F7AAFD /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		3089B7AA1F1AC13100F7AAFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExhaustFlame.sks; sourceTree = "<group>"; };
+		3089B7AE1F1BC1E200F7AAFD /* Shot.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Shot.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				3089B7A71F1A1E9000F7AAFD /* Sprite.swift */,
 				3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */,
 				3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */,
+				3089B7AE1F1BC1E200F7AAFD /* Shot.sks */,
 				3089B77A1F1807E200F7AAFD /* Assets.xcassets */,
 				3089B7A91F1AC13100F7AAFD /* Main.storyboard */,
 				3089B77C1F1807E200F7AAFD /* LaunchScreen.storyboard */,
@@ -250,6 +253,7 @@
 				3089B7AB1F1AC20000F7AAFD /* Main.storyboard in Resources */,
 				3089B77B1F1807E200F7AAFD /* Assets.xcassets in Resources */,
 				3089B7AD1F1ADB1000F7AAFD /* ExhaustFlame.sks in Resources */,
+				3089B7AF1F1BC1E200F7AAFD /* Shot.sks in Resources */,
 				3089B77E1F1807E200F7AAFD /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
