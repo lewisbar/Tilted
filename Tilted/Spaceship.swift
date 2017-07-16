@@ -13,8 +13,22 @@ class Spaceship: SKSpriteNode, Sprite {
     var healthPoints = 3
     let exhaustFlame = SKEmitterNode(fileNamed: "ExhaustFlame")
     
-    func shoot() {
+    func shoot(with vector: CGVector, zPosition: CGFloat) {
         
+        // Position in the spaceship's own coordinate system
+        let shot = SKEmitterNode(fileNamed: "Shot")!
+        shot.position = CGPoint(x: 0, y: size.height / 2)
+        addChild(shot)
+        
+        // Add to parent
+        shot.move(toParent: parent!)
+        shot.zPosition = zPosition
+        
+        // Action
+        let shoot = SKAction.move(by: vector, duration: 1)
+        let delete = SKAction.removeFromParent()
+        let shootingSequence = SKAction.sequence([shoot, delete])
+        shot.run(shootingSequence)
     }
     
     func setupExhaustFlame() {
@@ -34,4 +48,8 @@ class Spaceship: SKSpriteNode, Sprite {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        shoot()
+//    }
 }

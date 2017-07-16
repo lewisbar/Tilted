@@ -15,7 +15,8 @@ class GameScene: SKScene {
     
     struct ZPositions {
         static let background: CGFloat = 0
-        static let spaceship: CGFloat = 1
+        static let shot: CGFloat = 1
+        static let spaceship: CGFloat = 2
     }
     
     func setupBackground() {
@@ -43,5 +44,10 @@ class GameScene: SKScene {
             let touchPosition = touch.location(in: self)
             spaceship.position = CGPoint(x: touchPosition.x - self.size.width * 0.1, y: touchPosition.y + self.size.height * 0.1)
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let shootingVector = CGVector(dx: -self.size.width, dy: self.size.height)
+        spaceship.shoot(with: shootingVector, zPosition: ZPositions.shot)
     }
 }
