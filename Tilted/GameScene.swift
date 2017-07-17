@@ -109,7 +109,6 @@ class GameScene: SKScene {
         }
     }
     
-    // TODO: Path recognition for pause button doesn't work
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
@@ -120,7 +119,6 @@ class GameScene: SKScene {
                 return
             } else if pauseButton.path!.contains(location) {
                 isPaused = true
-                print("========\nPAUSE\n=========")
             }
             
             if fireButton.path!.contains(location) {
