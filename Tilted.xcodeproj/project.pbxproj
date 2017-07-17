@@ -65,7 +65,7 @@
 		3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExhaustFlame.sks; sourceTree = "<group>"; };
 		3089B7AE1F1BC1E200F7AAFD /* Shot.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Shot.sks; sourceTree = "<group>"; };
 		3089B7B01F1C1BC000F7AAFD /* FireButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireButton.swift; sourceTree = "<group>"; };
-		3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Abendhimmel.swift"; path = "../../../../../Desktop/UIColor+Abendhimmel.swift"; sourceTree = "<group>"; };
+		3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Abendhimmel.swift"; sourceTree = "<group>"; };
 		3089B7BA1F1C2B0300F7AAFD /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

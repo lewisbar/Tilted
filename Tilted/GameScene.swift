@@ -88,6 +88,14 @@ class GameScene: SKScene {
         setupSpaceship()
     }
     
+    func moveSpaceship(to location: CGPoint) {
+        let destination = CGPoint(x: location.x - self.size.width * 0.1, y: location.y + self.size.height * 0.1)
+        let distance = hypot(spaceship.position.x - destination.x, spaceship.position.y - destination.y)
+        let duration = TimeInterval(distance / 1000)
+        let move = SKAction.move(to: destination, duration: duration)
+        spaceship.run(move)
+    }
+    
     // TODO: Path recognition for pause button doesn't work
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -96,11 +104,7 @@ class GameScene: SKScene {
                 atPoint(location) != pauseButton, //!(pauseButton.path!.contains(location)),
                 atPoint(location) != pauseLayer {
 
-                let destination = CGPoint(x: location.x - self.size.width * 0.1, y: location.y + self.size.height * 0.1)
-                let distance = hypot(spaceship.position.x - destination.x, spaceship.position.y - destination.y)
-                let duration = TimeInterval(distance / 1000)
-                let move = SKAction.move(to: destination, duration: duration)
-                spaceship.run(move)
+                moveSpaceship(to: location)
             }
         }
     }
@@ -116,6 +120,8 @@ class GameScene: SKScene {
             } else if atPoint(location) == pauseLayer {
                 pauseLayerTouched = true
                 isPaused = false
+            } else {
+                moveSpaceship(to: location)
             }
         }
     }
