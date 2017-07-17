@@ -16,6 +16,7 @@ class GameScene: SKScene {
     var pauseButton: CornerButton!
     var pauseLayer: SKShapeNode?
     var pauseLayerTouched = false
+    let spaceshipSpeed: CGFloat = 1
     
     override var isPaused: Bool {
         didSet {
@@ -92,7 +93,7 @@ class GameScene: SKScene {
     func moveSpaceship(to location: CGPoint) {
         let destination = CGPoint(x: location.x - self.size.width * 0.1, y: location.y + self.size.height * 0.1)
         let distance = hypot(spaceship.position.x - destination.x, spaceship.position.y - destination.y)
-        let duration = TimeInterval(distance / 1000)
+        let duration = TimeInterval(distance * spaceshipSpeed / 1000)
         let move = SKAction.move(to: destination, duration: duration)
         spaceship.run(move)
     }
