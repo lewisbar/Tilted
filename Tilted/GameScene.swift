@@ -12,10 +12,11 @@ class GameScene: SKScene {
     
     var backgrounds: [SKSpriteNode]!
     let spaceship = Spaceship()
-    var fireButton: FireButton!
-    var pauseButton: PauseButton!
+    var fireButton: CornerButton!
+    var pauseButton: CornerButton!
     var pauseLayer: SKShapeNode?
     var pauseLayerTouched = false
+    
     override var isPaused: Bool {
         didSet {
             if isPaused == false {
@@ -57,15 +58,15 @@ class GameScene: SKScene {
     }
     
     func setupFireButton() {
-        fireButton = FireButton(size: CGSize(width: size.width / 4, height: size.height / 4))
-        fireButton.position = .zero
+        let buttonSize = CGSize(width: size.width / 4, height: size.height / 4)
+        fireButton = CornerButton(size: buttonSize, corner: .bottomLeft, in: self)
         fireButton.zPosition = ZPositions.buttons
         addChild(fireButton)
     }
     
     func setupPauseButton() {
-        pauseButton = PauseButton(size: CGSize(width: size.width / 4, height: size.height / 4))
-        pauseButton.position = size.topRight
+        let buttonSize = CGSize(width: size.width / 4, height: size.height / 4)
+        pauseButton = CornerButton(size: buttonSize, corner: .topRight, in: self)
         pauseButton.zPosition = ZPositions.buttons
         addChild(pauseButton)
     }
@@ -96,12 +97,11 @@ class GameScene: SKScene {
         spaceship.run(move)
     }
     
-    // TODO: Path recognition for pause button doesn't work
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
             if !(fireButton.path!.contains(location)),
-                atPoint(location) != pauseButton, //!(pauseButton.path!.contains(location)),
+                !(pauseButton.path!.contains(location)),
                 atPoint(location) != pauseLayer {
 
                 moveSpaceship(to: location)
@@ -109,20 +109,35 @@ class GameScene: SKScene {
         }
     }
     
+    // TODO: Path recognition for pause button doesn't work
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
-            if fireButton.path!.contains(location) {
-                let shootingVector = CGVector(dx: -self.size.width, dy: self.size.height)
-                spaceship.shoot(with: shootingVector, zPosition: ZPositions.shot)
-            } else if atPoint(location) == pauseButton{//pauseButton.path!.contains(location) {
-                isPaused = true
-            } else if atPoint(location) == pauseLayer {
+            
+            if atPoint(location) == pauseLayer {
                 pauseLayerTouched = true
                 isPaused = false
-            } else {
+                return
+            } else if pauseButton.path!.contains(location) {
+                isPaused = true
+                print("========\nPAUSE\n=========")
+            }
+            
+            if fireButton.path!.contains(location) {
+                let shootingVector = CGVector(dx: -self.size.width, dy: self.size.height)
+                spaceship.startShooting(with: shootingVector, zPosition: ZPositions.shot)
+            }
+            
+            if !(fireButton.path!.contains(location)),
+                !(pauseButton.path!.contains(location)),
+                atPoint(location) != pauseLayer {
+                
                 moveSpaceship(to: location)
             }
         }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        spaceship.stopShooting()
     }
 }
