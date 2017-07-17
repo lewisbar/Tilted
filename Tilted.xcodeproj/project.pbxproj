@@ -21,6 +21,9 @@
 		3089B7AB1F1AC20000F7AAFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7A91F1AC13100F7AAFD /* Main.storyboard */; };
 		3089B7AD1F1ADB1000F7AAFD /* ExhaustFlame.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */; };
 		3089B7AF1F1BC1E200F7AAFD /* Shot.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7AE1F1BC1E200F7AAFD /* Shot.sks */; };
+		3089B7B11F1C1BC000F7AAFD /* FireButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7B01F1C1BC000F7AAFD /* FireButton.swift */; };
+		3089B7B51F1C27F700F7AAFD /* UIColor+Abendhimmel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */; };
+		3089B7BB1F1C2B0300F7AAFD /* PauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7BA1F1C2B0300F7AAFD /* PauseButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		3089B7AA1F1AC13100F7AAFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExhaustFlame.sks; sourceTree = "<group>"; };
 		3089B7AE1F1BC1E200F7AAFD /* Shot.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Shot.sks; sourceTree = "<group>"; };
+		3089B7B01F1C1BC000F7AAFD /* FireButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireButton.swift; sourceTree = "<group>"; };
+		3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Abendhimmel.swift"; path = "../../../../../Desktop/UIColor+Abendhimmel.swift"; sourceTree = "<group>"; };
+		3089B7BA1F1C2B0300F7AAFD /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +121,11 @@
 				3089B7731F1807E200F7AAFD /* GameScene.swift */,
 				3089B7751F1807E200F7AAFD /* GameViewController.swift */,
 				3089B7A31F19771D00F7AAFD /* MovingBackground.swift */,
+				3089B7B01F1C1BC000F7AAFD /* FireButton.swift */,
+				3089B7BA1F1C2B0300F7AAFD /* PauseButton.swift */,
 				3089B7A51F1A1E3D00F7AAFD /* Spaceship.swift */,
 				3089B7A71F1A1E9000F7AAFD /* Sprite.swift */,
+				3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */,
 				3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */,
 				3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */,
 				3089B7AE1F1BC1E200F7AAFD /* Shot.sks */,
@@ -279,11 +288,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3089B7BB1F1C2B0300F7AAFD /* PauseButton.swift in Sources */,
 				3089B7A61F1A1E3D00F7AAFD /* Spaceship.swift in Sources */,
 				3089B7741F1807E200F7AAFD /* GameScene.swift in Sources */,
 				3089B7761F1807E200F7AAFD /* GameViewController.swift in Sources */,
+				3089B7B51F1C27F700F7AAFD /* UIColor+Abendhimmel.swift in Sources */,
 				3089B7A21F1965BE00F7AAFD /* CGSize+Extension.swift in Sources */,
 				3089B7A81F1A1E9000F7AAFD /* Sprite.swift in Sources */,
+				3089B7B11F1C1BC000F7AAFD /* FireButton.swift in Sources */,
 				3089B76E1F1807E200F7AAFD /* AppDelegate.swift in Sources */,
 				3089B7A41F19771D00F7AAFD /* MovingBackground.swift in Sources */,
 			);
