@@ -137,6 +137,11 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        spaceship.stopShooting()
+        for touch in touches {
+            let location = touch.location(in: self)
+            if fireButton.path!.contains(location) {
+                spaceship.stopShooting()
+            }
+        }
     }
 }
