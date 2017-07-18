@@ -104,8 +104,12 @@ class GameScene: SKScene {
             if !(fireButton.path!.contains(location)),
                 !(pauseButton.path!.contains(location)),
                 atPoint(location) != pauseLayer {
-
-                moveSpaceship(to: location)
+                
+                if fireButton.path!.contains(touch.previousLocation(in: self)) {
+                    spaceship.stopShooting()
+                } else {
+                    moveSpaceship(to: location)
+                }
             }
         }
     }
