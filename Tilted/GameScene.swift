@@ -135,6 +135,13 @@ class GameScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // TODO: Only move spaceship to closest touch
+        // Vorgehen:
+        //  - Welche touches aus dem Set touches sind auf dem Background?
+        //  - Welcher davon ist am dichtesten am Spaceship? -> closestTouch
+        //  - event.allTouches: Welche sind davon noch auf dem Background?
+        //  - Ist der closestTouch dichter dran als diese alle?
+        //  - Dann spaceship dahin bewegen. Sonst nichts machen.
         for touch in touches {
             let location = touch.location(in: self)
             

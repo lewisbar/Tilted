@@ -34,11 +34,13 @@ class Spaceship: SKSpriteNode, Sprite {
     }
     
     func startShooting(with vector: CGVector, zPosition: CGFloat) {
+        guard !shootingTimer.isValid else { return }
+        
         // First shot
         self.shoot(with: vector, zPosition: zPosition)
 
         // Continuous fire
-        shootingTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in 
+        shootingTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
             self.shoot(with: vector, zPosition: zPosition)
         }
     }
