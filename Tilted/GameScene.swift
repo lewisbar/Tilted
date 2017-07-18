@@ -142,6 +142,7 @@ class GameScene: SKScene {
         //  - event.allTouches: Welche sind davon noch auf dem Background?
         //  - Ist der closestTouch dichter dran als diese alle?
         //  - Dann spaceship dahin bewegen. Sonst nichts machen.
+        
         for touch in touches {
             let location = touch.location(in: self)
             
@@ -170,11 +171,24 @@ class GameScene: SKScene {
         }
     }
     
+    fileprivate func fireButtonIsStillBeingTouched(_ event: UIEvent?, _ touch: UITouch) -> Bool {
+        if let allTouches = event?.allTouches {
+            for otherTouch in allTouches {
+                if otherTouch != touch, fireButton.path!.contains(otherTouch.location(in: self)) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
             if fireButton.path!.contains(location) {
-                spaceship.stopShooting()
+                if !fireButtonIsStillBeingTouched(event, touch) {
+                    spaceship.stopShooting()
+                }
             } /*else if isOnBackground(location) {
                 backgroundIsBeingTouched = false
             }*/
