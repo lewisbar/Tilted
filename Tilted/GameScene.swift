@@ -17,6 +17,7 @@ class GameScene: SKScene {
     var pauseLayer: SKShapeNode?
     var pauseLayerTouched = false
     let spaceshipSpeed: CGFloat = 1
+    //var backgroundIsBeingTouched = false
     
     override var isPaused: Bool {
         didSet {
@@ -90,21 +91,28 @@ class GameScene: SKScene {
         setupSpaceship()
     }
     
+    func distanceFromSpaceship(to position: CGPoint) -> CGFloat {
+        return hypot(spaceship.position.x - position.x, spaceship.position.y - position.y)
+    }
+    
     func moveSpaceship(to location: CGPoint) {
         let destination = CGPoint(x: location.x - self.size.width * 0.1, y: location.y + self.size.height * 0.1)
-        let distance = hypot(spaceship.position.x - destination.x, spaceship.position.y - destination.y)
+        let distance = distanceFromSpaceship(to: destination)
         let duration = TimeInterval(distance * spaceshipSpeed / 1000)
         let move = SKAction.move(to: destination, duration: duration)
         spaceship.run(move)
     }
     
+    private func isOnBackground(_ location: CGPoint) -> Bool {
+        return !(fireButton.path!.contains(location))
+            && !(pauseButton.path!.contains(location))
+            && atPoint(location) != pauseLayer
+    }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
-            if !(fireButton.path!.contains(location)),
-                !(pauseButton.path!.contains(location)),
-                atPoint(location) != pauseLayer {
-                
+            if isOnBackground(location) {
                 if fireButton.path!.contains(touch.previousLocation(in: self)) {
                     spaceship.stopShooting()
                 } else {
@@ -112,8 +120,20 @@ class GameScene: SKScene {
                 }
             }
         }
+//        // Only the closest touch should move the spaceship
+//        let orderedTouches = touches.sorted {
+//            distanceFromSpaceship(to: $0.location(in: self))
+//                < distanceFromSpaceship(to: $1.location(in: self))
+//        }
+//        for touch in orderedTouches {
+//            let location = touch.location(in: self)
+//            if isOnBackground(location) {
+//                moveSpaceship(to: location)
+//                return
+//            }
+//        }
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
@@ -131,12 +151,15 @@ class GameScene: SKScene {
                 spaceship.startShooting(with: shootingVector, zPosition: ZPositions.shot)
             }
             
-            if !(fireButton.path!.contains(location)),
-                !(pauseButton.path!.contains(location)),
-                atPoint(location) != pauseLayer {
-                
+            if isOnBackground(location) {
                 moveSpaceship(to: location)
             }
+//            if isOnBackground(location), !backgroundIsBeingTouched {
+//                backgroundIsBeingTouched = true
+//                moveSpaceship(to: location)
+//            } else if isOnBackground(touch.previousLocation(in: self)) {
+//                backgroundIsBeingTouched = false
+//            }
         }
     }
     
@@ -145,7 +168,9 @@ class GameScene: SKScene {
             let location = touch.location(in: self)
             if fireButton.path!.contains(location) {
                 spaceship.stopShooting()
-            }
+            } /*else if isOnBackground(location) {
+                backgroundIsBeingTouched = false
+            }*/
         }
     }
 }
