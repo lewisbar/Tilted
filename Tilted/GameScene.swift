@@ -92,7 +92,8 @@ class GameScene: SKScene {
     }
     
     func distanceFromSpaceship(to position: CGPoint) -> CGFloat {
-        return hypot(spaceship.position.x - position.x, spaceship.position.y - position.y)
+        return hypot((spaceship.position.x + self.size.width * 0.1) - position.x,
+                     (spaceship.position.y - self.size.height * 0.1) - position.y)
     }
     
     func moveSpaceship(to location: CGPoint) {
@@ -116,7 +117,12 @@ class GameScene: SKScene {
                 if fireButton.path!.contains(touch.previousLocation(in: self)) {
                     spaceship.stopShooting()
                 } else {
-                    moveSpaceship(to: location)
+                    
+                    if let closestTouch = touchClosestToSpaceship(event: event) {
+                        moveSpaceship(to: closestTouch.location(in: self))
+                        return
+                    }
+                    //moveSpaceship(to: location)
                 }
             }
         }
@@ -134,6 +140,17 @@ class GameScene: SKScene {
 //        }
     }
 
+    private func touchClosestToSpaceship(event: UIEvent?) -> UITouch? {
+        if let allTouches = event?.allTouches {
+            let orderedTouches = allTouches.sorted {
+                distanceFromSpaceship(to: $0.location(in: self))
+                    < distanceFromSpaceship(to: $1.location(in: self))
+            }
+            return orderedTouches.first
+        }
+        return nil
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // TODO: Only move spaceship to closest touch
         // Vorgehen:
@@ -142,6 +159,7 @@ class GameScene: SKScene {
         //  - event.allTouches: Welche sind davon noch auf dem Background?
         //  - Ist der closestTouch dichter dran als diese alle?
         //  - Dann spaceship dahin bewegen. Sonst nichts machen.
+        // Nein. Einfach allTouches auswerten und der dichteste zählt, fertig.
         
         for touch in touches {
             let location = touch.location(in: self)
@@ -160,7 +178,10 @@ class GameScene: SKScene {
             }
             
             if isOnBackground(location) {
-                moveSpaceship(to: location)
+                if let closestTouch = touchClosestToSpaceship(event: event) {
+                    moveSpaceship(to: closestTouch.location(in: self))
+                    return
+                }
             }
 //            if isOnBackground(location), !backgroundIsBeingTouched {
 //                backgroundIsBeingTouched = true
@@ -182,6 +203,7 @@ class GameScene: SKScene {
         return false
     }
     
+    // TODO: If a touch on background ends but there are other touches on the background, move the spaceship to the closest touch
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
