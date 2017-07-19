@@ -141,14 +141,16 @@ class GameScene: SKScene {
 //        }
     }
 
-    //private func touches(_ touches: sortedByDistanceToSpaceship
+    private func touchesSortedByDistanceToSpaceship(_ touches: Set<UITouch>) -> [UITouch]{
+        return touches.sorted {
+            distanceFromSpaceship(to: $0.location(in: self))
+                < distanceFromSpaceship(to: $1.location(in: self))
+        }
+    }
     
     private func touchClosestToSpaceship(event: UIEvent?) -> UITouch? {
         if let allTouches = event?.allTouches {
-            let orderedTouches = allTouches.sorted {
-                distanceFromSpaceship(to: $0.location(in: self))
-                    < distanceFromSpaceship(to: $1.location(in: self))
-            }
+            let orderedTouches = touchesSortedByDistanceToSpaceship(allTouches)
             return orderedTouches.first
         }
         return nil
@@ -200,11 +202,16 @@ class GameScene: SKScene {
                     spaceship.stopShooting()
                 }
             } else if isOnBackground(location) {
-                if touch == touchClosestToSpaceship(event: event) {
-                    var remainingTouches = event?.allTouches
-                    remainingTouches?.remove(touch)
-                    
-                    if let nextClosestTouch = touchClosestToSpaceship(event: event) {
+                if touch == touchClosestToSpaceship(event: event),
+                    var remainingTouches = event?.allTouches {
+                    remainingTouches.remove(touch)
+                    for remainingTouch in remainingTouches {
+                        let loc = remainingTouch.location(in: self)
+                        if !isOnBackground(loc) {
+                            remainingTouches.remove(remainingTouch)
+                        }
+                    }
+                    if let nextClosestTouch = touchesSortedByDistanceToSpaceship(remainingTouches).first {
                         spaceship.moveHandle(to: nextClosestTouch.location(in: self))
                         return
                     }
