@@ -119,7 +119,7 @@ class GameScene: SKScene {
                     spaceship.stopShooting()
                 } else {
                     
-                    if let closestTouch = touchClosestToSpaceship(event: event) {
+                    if let closestTouch = touchClosestToSpaceship(touches: event?.allTouches) {
                         spaceship.moveHandle(to: closestTouch.location(in: self))
                         return
                     }
@@ -141,17 +141,20 @@ class GameScene: SKScene {
 //        }
     }
 
-    private func touchesSortedByDistanceToSpaceship(_ touches: Set<UITouch>) -> [UITouch]{
+    private func touchesSortedByDistanceToSpaceship(_ touches: Set<UITouch>?) -> [UITouch]? {
+        if let touches = touches {
         return touches.sorted {
             distanceFromSpaceship(to: $0.location(in: self))
                 < distanceFromSpaceship(to: $1.location(in: self))
+            }
         }
+        return nil
     }
     
-    private func touchClosestToSpaceship(event: UIEvent?) -> UITouch? {
-        if let allTouches = event?.allTouches {
-            let orderedTouches = touchesSortedByDistanceToSpaceship(allTouches)
-            return orderedTouches.first
+    private func touchClosestToSpaceship(touches: Set<UITouch>?) -> UITouch? {
+        if let touches = touches {
+            let orderedTouches = touchesSortedByDistanceToSpaceship(touches)
+            return orderedTouches?.first
         }
         return nil
     }
@@ -174,7 +177,7 @@ class GameScene: SKScene {
             }
             
             if isOnBackground(location) {
-                if let closestTouch = touchClosestToSpaceship(event: event) {
+                if let closestTouch = touchClosestToSpaceship(touches: event?.allTouches) {
                     spaceship.moveHandle(to: closestTouch.location(in: self))
                     return
                 }
@@ -201,7 +204,7 @@ class GameScene: SKScene {
                     spaceship.stopShooting()
                 }
             } else if isOnBackground(location) {
-                if touch == touchClosestToSpaceship(event: event),
+                if touch == touchClosestToSpaceship(touches: event?.allTouches),
                     var remainingTouches = event?.allTouches {
                     remainingTouches.remove(touch)
                     for remainingTouch in remainingTouches {
@@ -210,7 +213,7 @@ class GameScene: SKScene {
                             remainingTouches.remove(remainingTouch)
                         }
                     }
-                    if let nextClosestTouch = touchesSortedByDistanceToSpaceship(remainingTouches).first {
+                    if let nextClosestTouch = touchClosestToSpaceship(touches: remainingTouches) {
                         spaceship.moveHandle(to: nextClosestTouch.location(in: self))
                         return
                     }
