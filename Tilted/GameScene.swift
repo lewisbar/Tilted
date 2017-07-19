@@ -192,8 +192,7 @@ class GameScene: SKScene {
         }
         return false
     }
-    
-    // TODO: If a touch on background ends but there are other touches on the background, move the spaceship to the closest touch. Not sure about that ...
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
