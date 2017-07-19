@@ -11,9 +11,24 @@ import SpriteKit
 class Spaceship: SKSpriteNode, Sprite {
     
     var healthPoints = 3
+    var flyingSpeed: CGFloat = 1
     let exhaustFlame = SKEmitterNode(fileNamed: "ExhaustFlame")
     let endlessShootingKey = "endlessShootingSequence"
     var shootingTimer = Timer()
+    var handleOffset = CGPoint(x: 0, y: 0)
+    var handle: CGPoint {
+        let x = self.position.x + handleOffset.x
+        let y = self.position.y + handleOffset.y
+        return CGPoint(x: x, y: y)
+    }
+    
+    func moveHandle(to destination: CGPoint) {
+        let spaceshipDestination = CGPoint(x: destination.x - handleOffset.x, y: destination.y - handleOffset.y)
+        let distance = hypot(handle.x - destination.x, handle.y - destination.y)
+        let duration = TimeInterval(distance * flyingSpeed / 1000)
+        let move = SKAction.move(to: spaceshipDestination, duration: duration)
+        run(move)
+    }
     
     @objc func shoot(with vector: CGVector, zPosition: CGFloat) {
         

@@ -16,8 +16,6 @@ class GameScene: SKScene {
     var pauseButton: CornerButton!
     var pauseLayer: SKShapeNode?
     var pauseLayerTouched = false
-    let spaceshipSpeed: CGFloat = 1
-    //var backgroundIsBeingTouched = false
     
     override var isPaused: Bool {
         didSet {
@@ -54,6 +52,7 @@ class GameScene: SKScene {
     
     func setupSpaceship() {
         spaceship.position = CGPoint(x: self.size.width * 0.7, y: self.size.height * 0.3)
+        spaceship.handleOffset = CGPoint(x: self.size.width * 0.1, y: -self.size.height * 0.1)
         spaceship.zRotation = self.size.lowerRightAngleOverDiagonal()
         spaceship.zPosition = ZPositions.spaceship
         self.addChild(spaceship)
@@ -92,17 +91,19 @@ class GameScene: SKScene {
     }
     
     func distanceFromSpaceship(to position: CGPoint) -> CGFloat {
-        return hypot((spaceship.position.x + self.size.width * 0.1) - position.x,
-                     (spaceship.position.y - self.size.height * 0.1) - position.y)
+        return hypot(spaceship.handle.x - position.x,
+                     spaceship.handle.y - position.y)
+//        return hypot((spaceship.position.x + self.size.width * 0.1) - position.x,
+//                     (spaceship.position.y - self.size.height * 0.1) - position.y)
     }
     
-    func moveSpaceship(to location: CGPoint) {
-        let destination = CGPoint(x: location.x - self.size.width * 0.1, y: location.y + self.size.height * 0.1)
-        let distance = distanceFromSpaceship(to: destination)
-        let duration = TimeInterval(distance * spaceshipSpeed / 1000)
-        let move = SKAction.move(to: destination, duration: duration)
-        spaceship.run(move)
-    }
+//    func moveSpaceship(to location: CGPoint) {
+//        let destination = CGPoint(x: location.x - self.size.width * 0.1, y: location.y + self.size.height * 0.1)
+//        let distance = distanceFromSpaceship(to: destination)
+//        let duration = TimeInterval(distance * spaceship.flyingSpeed / 1000)
+//        let move = SKAction.move(to: destination, duration: duration)
+//        spaceship.run(move)
+//    }
     
     private func isOnBackground(_ location: CGPoint) -> Bool {
         return !(fireButton.path!.contains(location))
@@ -119,10 +120,10 @@ class GameScene: SKScene {
                 } else {
                     
                     if let closestTouch = touchClosestToSpaceship(event: event) {
-                        moveSpaceship(to: closestTouch.location(in: self))
+                        spaceship.moveHandle(to: closestTouch.location(in: self))
                         return
                     }
-                    //moveSpaceship(to: location)
+                    //spaceship.moveHandle(to: location)
                 }
             }
         }
@@ -134,12 +135,14 @@ class GameScene: SKScene {
 //        for touch in orderedTouches {
 //            let location = touch.location(in: self)
 //            if isOnBackground(location) {
-//                moveSpaceship(to: location)
+//                spaceship.moveHandle(to: location)
 //                return
 //            }
 //        }
     }
 
+    //private func touches(_ touches: sortedByDistanceToSpaceship
+    
     private func touchClosestToSpaceship(event: UIEvent?) -> UITouch? {
         if let allTouches = event?.allTouches {
             let orderedTouches = allTouches.sorted {
@@ -170,16 +173,10 @@ class GameScene: SKScene {
             
             if isOnBackground(location) {
                 if let closestTouch = touchClosestToSpaceship(event: event) {
-                    moveSpaceship(to: closestTouch.location(in: self))
+                    spaceship.moveHandle(to: closestTouch.location(in: self))
                     return
                 }
             }
-//            if isOnBackground(location), !backgroundIsBeingTouched {
-//                backgroundIsBeingTouched = true
-//                moveSpaceship(to: location)
-//            } else if isOnBackground(touch.previousLocation(in: self)) {
-//                backgroundIsBeingTouched = false
-//            }
         }
     }
     
@@ -194,7 +191,7 @@ class GameScene: SKScene {
         return false
     }
     
-    // TODO: If a touch on background ends but there are other touches on the background, move the spaceship to the closest touch
+    // TODO: If a touch on background ends but there are other touches on the background, move the spaceship to the closest touch. Not sure about that ...
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
@@ -202,9 +199,17 @@ class GameScene: SKScene {
                 if !fireButtonIsStillBeingTouched(event, touch) {
                     spaceship.stopShooting()
                 }
-            } /*else if isOnBackground(location) {
-                backgroundIsBeingTouched = false
-            }*/
+            } else if isOnBackground(location) {
+                if touch == touchClosestToSpaceship(event: event) {
+                    var remainingTouches = event?.allTouches
+                    remainingTouches?.remove(touch)
+                    
+                    if let nextClosestTouch = touchClosestToSpaceship(event: event) {
+                        spaceship.moveHandle(to: nextClosestTouch.location(in: self))
+                        return
+                    }
+                }
+            }
         }
     }
 }
