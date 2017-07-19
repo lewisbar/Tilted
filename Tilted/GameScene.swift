@@ -93,17 +93,7 @@ class GameScene: SKScene {
     func distanceFromSpaceship(to position: CGPoint) -> CGFloat {
         return hypot(spaceship.handle.x - position.x,
                      spaceship.handle.y - position.y)
-//        return hypot((spaceship.position.x + self.size.width * 0.1) - position.x,
-//                     (spaceship.position.y - self.size.height * 0.1) - position.y)
     }
-    
-//    func moveSpaceship(to location: CGPoint) {
-//        let destination = CGPoint(x: location.x - self.size.width * 0.1, y: location.y + self.size.height * 0.1)
-//        let distance = distanceFromSpaceship(to: destination)
-//        let duration = TimeInterval(distance * spaceship.flyingSpeed / 1000)
-//        let move = SKAction.move(to: destination, duration: duration)
-//        spaceship.run(move)
-//    }
     
     private func isOnBackground(_ location: CGPoint) -> Bool {
         return !(fireButton.path!.contains(location))
@@ -123,22 +113,9 @@ class GameScene: SKScene {
                         spaceship.moveHandle(to: closestTouch.location(in: self))
                         return
                     }
-                    //spaceship.moveHandle(to: location)
                 }
             }
         }
-//        // Only the closest touch should move the spaceship
-//        let orderedTouches = touches.sorted {
-//            distanceFromSpaceship(to: $0.location(in: self))
-//                < distanceFromSpaceship(to: $1.location(in: self))
-//        }
-//        for touch in orderedTouches {
-//            let location = touch.location(in: self)
-//            if isOnBackground(location) {
-//                spaceship.moveHandle(to: location)
-//                return
-//            }
-//        }
     }
 
     private func touchesSortedByDistanceToSpaceship(_ touches: Set<UITouch>?) -> [UITouch]? {
