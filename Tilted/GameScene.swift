@@ -138,6 +138,7 @@ class GameScene: SKScene {
         return nil
     }
     
+    // TODO: When two fingers touch the background and the spaceship finger is shortly lifted and then put down again before the spaceship is closer to the other finger, the spaceship first returns to the original spaceship finger and then travels to the other finger. I'm not sure if this bug is to be found in touchesBegan or touchesEnded, or both.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
