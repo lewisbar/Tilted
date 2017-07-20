@@ -108,10 +108,12 @@ class GameScene: SKScene {
                 if fireButton.path!.contains(touch.previousLocation(in: self)) {
                     spaceship.stopShooting()
                 } else {
-                    
-                    if let closestTouch = touchClosestToSpaceship(touches: event?.allTouches) {
-                        spaceship.moveHandle(to: closestTouch.location(in: self))
-                        return
+                    if var remainingTouches = event?.allTouches {
+                        remainingTouches = remainingTouches.filter { $0.phase != .ended }
+                        if let closestTouch = touchClosestToSpaceship(touches: event?.allTouches) {
+                            spaceship.moveHandle(to: closestTouch.location(in: self))
+                            return
+                        }
                     }
                 }
             }
@@ -154,18 +156,21 @@ class GameScene: SKScene {
             }
             
             if isOnBackground(location) {
-                if let closestTouch = touchClosestToSpaceship(touches: event?.allTouches) {
-                    spaceship.moveHandle(to: closestTouch.location(in: self))
-                    return
+                if var remainingTouches = event?.allTouches {
+                    remainingTouches = remainingTouches.filter { $0.phase != .ended }
+                    if let closestTouch = touchClosestToSpaceship(touches: remainingTouches) {
+                        spaceship.moveHandle(to: closestTouch.location(in: self))
+                        return
+                    }
                 }
             }
         }
     }
     
-    fileprivate func fireButtonIsStillBeingTouched(_ event: UIEvent?, _ touch: UITouch) -> Bool {
+    fileprivate func fireButtonIsStillBeingTouched(event: UIEvent?, endedTouch: UITouch) -> Bool {
         if let allTouches = event?.allTouches {
             for otherTouch in allTouches {
-                if otherTouch != touch, fireButton.path!.contains(otherTouch.location(in: self)) {
+                if otherTouch != endedTouch, fireButton.path!.contains(otherTouch.location(in: self)) {
                     return true
                 }
             }
@@ -177,22 +182,24 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if fireButton.path!.contains(location) {
-                if !fireButtonIsStillBeingTouched(event, touch) {
+                if !fireButtonIsStillBeingTouched(event: event, endedTouch: touch) {
                     spaceship.stopShooting()
                 }
             } else if isOnBackground(location) {
+                // TODO: Spaceship sometimes moves to finger on fire button if it is the closest touch.
+                // To reproduce:
+                // - Hold spaceship near the fire button
+                // - Put a second finger far away from the spaceship (at least farther than the fire button)
+                // - Put a third finger on the fire button
+                // - Release the spaceship finger
+                // -> The spaceship now should move to the finger that is not on the fire button, but it first moves to the fire button and then to the correct finger
                 if touch == touchClosestToSpaceship(touches: event?.allTouches),
                     var remainingTouches = event?.allTouches {
-                    remainingTouches.remove(touch)
-                    for remainingTouch in remainingTouches {
-                        let loc = remainingTouch.location(in: self)
-                        if !isOnBackground(loc) {
-                            remainingTouches.remove(remainingTouch)
-                        }
-                    }
+                    remainingTouches = remainingTouches.filter { isOnBackground($0.location(in: self)) && $0.phase != .ended }
+
                     if let nextClosestTouch = touchClosestToSpaceship(touches: remainingTouches) {
                         spaceship.moveHandle(to: nextClosestTouch.location(in: self))
-                        return
+                        //return
                     }
                 }
             }
