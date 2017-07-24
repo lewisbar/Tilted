@@ -56,7 +56,7 @@ class CornerButton: SKSpriteNode {
         let view = SKView()
         let texture = view.texture(from: shape)
         
-        super.init(texture: texture, color: .treePoppy, size: size)
+        super.init(texture: texture, color: .clear, size: size)
         anchorPoint = anchor
         position = c
     }
@@ -66,9 +66,6 @@ class CornerButton: SKSpriteNode {
     }
     
     override func contains(_ p: CGPoint) -> Bool {
-
-        //let translation = CGAffineTransform(translationX: position.x, y: position.y)
-
-        return path.contains(p) //, transform: translation)
+        return path.contains(p)
     }
 }
