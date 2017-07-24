@@ -96,8 +96,8 @@ class GameScene: SKScene {
     }
     
     private func isOnBackground(_ location: CGPoint) -> Bool {
-        return !(fireButton.path!.contains(location))
-            && !(pauseButton.path!.contains(location))
+        return !(fireButton.contains(location))
+            && !(pauseButton.contains(location))
             && atPoint(location) != pauseLayer
     }
     
@@ -105,7 +105,7 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if isOnBackground(location) {
-                if fireButton.path!.contains(touch.previousLocation(in: self)) {
+                if fireButton.contains(touch.previousLocation(in: self)) {
                     spaceship.stopShooting()
                 } else {
                     if var remainingTouches = event?.allTouches {
@@ -147,11 +147,11 @@ class GameScene: SKScene {
                 pauseLayerTouched = true
                 isPaused = false
                 return
-            } else if pauseButton.path!.contains(location) {
+            } else if pauseButton.contains(location) {
                 isPaused = true
             }
             
-            if fireButton.path!.contains(location) {
+            if fireButton.contains(location) {
                 let shootingVector = CGVector(dx: -self.size.width, dy: self.size.height)
                 spaceship.startShooting(with: shootingVector, zPosition: ZPositions.shot)
             }
@@ -171,7 +171,7 @@ class GameScene: SKScene {
     fileprivate func fireButtonIsStillBeingTouched(event: UIEvent?, endedTouch: UITouch) -> Bool {
         if let allTouches = event?.allTouches {
             for otherTouch in allTouches {
-                if otherTouch != endedTouch, fireButton.path!.contains(otherTouch.location(in: self)) {
+                if otherTouch != endedTouch, fireButton.contains(otherTouch.location(in: self)) {
                     return true
                 }
             }
@@ -182,7 +182,7 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
-            if fireButton.path!.contains(location) {
+            if fireButton.contains(location) {
                 if !fireButtonIsStillBeingTouched(event: event, endedTouch: touch) {
                     spaceship.stopShooting()
                 }
