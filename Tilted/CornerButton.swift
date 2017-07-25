@@ -10,6 +10,7 @@ import SpriteKit
 
 protocol CornerButtonDelegate {
     func cornerButtonPressed(_ sender: CornerButton)
+    func cornerButtonReleased(_ sender: CornerButton)
 }
 
 class CornerButton: SKSpriteNode {
@@ -18,7 +19,9 @@ class CornerButton: SKSpriteNode {
     var delegate: CornerButtonDelegate?
     var isPressed = false {
         didSet {
-            delegate?.cornerButtonPressed(self)
+            print("isPressed set")
+            if isPressed { delegate?.cornerButtonPressed(self) }
+            else { delegate?.cornerButtonReleased(self)}
         }
     }
     
@@ -69,6 +72,8 @@ class CornerButton: SKSpriteNode {
         super.init(texture: texture, color: .clear, size: size)
         anchorPoint = anchor
         position = c
+        
+        isUserInteractionEnabled = true // So the node can receive touch events
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,6 +82,7 @@ class CornerButton: SKSpriteNode {
     
     // MARK: - Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touch")
         setIsPressed(accordingTo: event)
     }
     
