@@ -11,6 +11,7 @@ import SpriteKit
 class CornerButton: SKSpriteNode {
     
     var path = CGMutablePath()
+    var isPressed = false
     
     enum Corner {
         case topLeft
@@ -65,7 +66,32 @@ class CornerButton: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Touches
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        setIsPressed(accordingTo: event)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        setIsPressed(accordingTo: event)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        setIsPressed(accordingTo: event)
+    }
+    
     override func contains(_ p: CGPoint) -> Bool {
         return path.contains(p)
+    }
+
+    private func setIsPressed(accordingTo event: UIEvent?) {
+        guard let allTouches = event?.allTouches else { return }
+        
+        for touch in allTouches {
+            if touch.phase != .ended, self.contains(touch.location(in: self)) {
+                isPressed = true
+                return
+            }
+        }
+        isPressed = false
     }
 }

@@ -133,10 +133,8 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
-            if fireButton.contains(location) {
-                if !fireButtonIsStillBeingTouched(touches: event?.allTouches) {
-                    spaceship.stopShooting()
-                }
+            if fireButton.contains(location), !fireButtonIsStillBeingTouched(touches: event?.allTouches) {
+                spaceship.stopShooting()
             } else if isOnBackground(location) {
                 // TODO: Spaceship sometimes moves to finger on fire button if it is the closest touch.
                 // To reproduce:
