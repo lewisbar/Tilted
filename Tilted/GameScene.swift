@@ -14,7 +14,7 @@ class GameScene: SKScene {
     let spaceship = Spaceship()
     var fireButton: CornerButton!
     var pauseButton: CornerButton!
-    var pauseLayer: SKShapeNode?
+    var pauseLayer: PauseLayer?
     var pauseLayerTouched = false
     
     override var isPaused: Bool {
@@ -76,12 +76,11 @@ class GameScene: SKScene {
     }
     
     func setupPauseLayer() {
-        pauseLayer = SKShapeNode(rectOf: size)
-        pauseLayer?.fillColor = SKColor.lemonYellow.withAlphaComponent(0.3)
+        pauseLayer = PauseLayer(rectOf: size)
         pauseLayer?.position = size.center
         pauseLayer?.zPosition = ZPositions.pauseLayer
-        pauseLayer?.isHidden = true
         addChild(pauseLayer!)
+        pauseLayer?.delegate = self
     }
     
     override func didMove(to view: SKView) {
@@ -228,5 +227,12 @@ extension GameScene: CornerButtonDelegate {
         default:
             return
         }
+    }
+}
+
+extension GameScene: PauseLayerDelegate {
+    func pauseLayerTouched(_ sender: PauseLayer) {
+        pauseLayerTouched = true
+        isPaused = false
     }
 }

@@ -19,8 +19,8 @@ class CornerButton: SKSpriteNode {
     var delegate: CornerButtonDelegate?
     var isPressed = false {
         didSet {
-            if isPressed, !oldValue { delegate?.cornerButtonPressed(self); print("isPressed = true") }
-            else if !isPressed, oldValue { delegate?.cornerButtonReleased(self); print("isPressed = false")}
+            if isPressed, !oldValue { delegate?.cornerButtonPressed(self)}
+            else if !isPressed, oldValue { delegate?.cornerButtonReleased(self)}
         }
     }
     
