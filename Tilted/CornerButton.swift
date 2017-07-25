@@ -19,9 +19,8 @@ class CornerButton: SKSpriteNode {
     var delegate: CornerButtonDelegate?
     var isPressed = false {
         didSet {
-            print("isPressed set")
-            if isPressed { delegate?.cornerButtonPressed(self) }
-            else { delegate?.cornerButtonReleased(self)}
+            if isPressed, !oldValue { delegate?.cornerButtonPressed(self); print("isPressed = true") }
+            else if !isPressed, oldValue { delegate?.cornerButtonReleased(self); print("isPressed = false")}
         }
     }
     
@@ -61,7 +60,7 @@ class CornerButton: SKSpriteNode {
             anchor = CGPoint(x: 1, y: 0)
         }
         
-        path.addLines(between: [a, b, c, a])
+        path.addLines(between: [c, a, b, c])
         
         let shape = SKShapeNode(path: path)
         shape.fillColor = .treePoppy
@@ -82,7 +81,6 @@ class CornerButton: SKSpriteNode {
     
     // MARK: - Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch")
         setIsPressed(accordingTo: event)
     }
     
@@ -95,7 +93,8 @@ class CornerButton: SKSpriteNode {
     }
     
     override func contains(_ p: CGPoint) -> Bool {
-        return path.contains(p)
+        let translation = CGAffineTransform(translationX: position.x, y: position.y)
+        return path.contains(p, transform: translation)
     }
 
     private func setIsPressed(accordingTo event: UIEvent?) {
