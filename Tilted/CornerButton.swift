@@ -8,10 +8,19 @@
 
 import SpriteKit
 
+protocol CornerButtonDelegate {
+    func cornerButtonPressed(_ sender: CornerButton)
+}
+
 class CornerButton: SKSpriteNode {
     
     var path = CGMutablePath()
-    var isPressed = false
+    var delegate: CornerButtonDelegate?
+    var isPressed = false {
+        didSet {
+            delegate?.cornerButtonPressed(self)
+        }
+    }
     
     enum Corner {
         case topLeft
