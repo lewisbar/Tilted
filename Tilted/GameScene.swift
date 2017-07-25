@@ -99,7 +99,7 @@ class GameScene: SKScene {
                 startShooting()
             } else if pauseButton.contains(location) {
                 isPaused = true
-            } else if isOnBackground(location), fireButton.contains(touch.previousLocation(in: self)), fireButtonIsStillBeingTouched(event: event, endedTouch: <#T##UITouch#>) {
+            } else if isOnBackground(location), fireButton.contains(touch.previousLocation(in: self)), fireButtonIsStillBeingTouched(touches: event?.allTouches) {
                 spaceship.stopShooting()
             } else if isOnBackground(location) {
                 moveSpaceshipToClosestRemainingTouch(touches: event?.allTouches)
@@ -134,7 +134,7 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             if fireButton.contains(location) {
-                if !fireButtonIsStillBeingTouched(event: event, endedTouch: touch) {
+                if !fireButtonIsStillBeingTouched(touches: event?.allTouches) {
                     spaceship.stopShooting()
                 }
             } else if isOnBackground(location) {
@@ -197,12 +197,11 @@ class GameScene: SKScene {
         return remainingTouches.filter { isOnBackground($0.location(in: self)) && $0.phase != .ended }
     }
     
-    private func fireButtonIsStillBeingTouched(event: UIEvent?, endedTouch: UITouch) -> Bool {
-        if let allTouches = event?.allTouches {
-            for otherTouch in allTouches {
-                if otherTouch != endedTouch, fireButton.contains(otherTouch.location(in: self)) {
-                    return true
-                }
+    private func fireButtonIsStillBeingTouched(touches: Set<UITouch>?) -> Bool {
+        guard let touches = touches else { return false }
+        for touch in touches {
+            if fireButton.contains(touch.location(in: self)) {
+                return true
             }
         }
         return false
