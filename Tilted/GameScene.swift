@@ -14,8 +14,10 @@ class GameScene: SKScene {
     let spaceship = Spaceship()
     var fireButton: CornerButton!
     var pauseButton: CornerButton!
+    var navigationSpace: NavigationSpace!
     var pauseLayer: PauseLayer?
     var pauseLayerTouched = false
+    lazy var buttonSize: CGSize = CGSize(width: size.width / 4, height: size.height / 4)
     
     override var isPaused: Bool {
         didSet {
@@ -40,6 +42,7 @@ class GameScene: SKScene {
         static let shot: CGFloat = 1
         static let spaceship: CGFloat = 2
         static let buttons: CGFloat = 3
+        static let navigationSpace: CGFloat = 3
         static let pauseLayer: CGFloat = 4
     }
     
@@ -60,20 +63,25 @@ class GameScene: SKScene {
     }
     
     func setupFireButton() {
-        let buttonSize = CGSize(width: size.width / 4, height: size.height / 4)
         fireButton = CornerButton(size: buttonSize, corner: .bottomLeft, in: self)
         fireButton.zPosition = ZPositions.buttons
-        addChild(fireButton)
         fireButton.delegate = self
+        addChild(fireButton)
     }
     
     func setupPauseButton() {
-        let buttonSize = CGSize(width: size.width / 4, height: size.height / 4)
         pauseButton = CornerButton(size: buttonSize, corner: .topRight, in: self)
         pauseButton.zPosition = ZPositions.buttons
-        addChild(pauseButton)
         pauseButton.delegate = self
+        addChild(pauseButton)
     }
+    
+//    func setupNavigationSpace() {
+//        navigationSpace = NavigationSpace(cornerSize: buttonSize, in: self)
+//        navigationSpace.zPosition = ZPositions.navigationSpace
+//        navigationSpace.delegate = self
+//        addChild(navigationSpace)
+//    }
     
     func setupPauseLayer() {
         pauseLayer = PauseLayer(rectOf: size)
@@ -88,6 +96,7 @@ class GameScene: SKScene {
         setupBackground()
         setupFireButton()
         setupPauseButton()
+        //setupNavigationSpace()
         setupPauseLayer()
         setupSpaceship()
     }
@@ -151,50 +160,37 @@ class GameScene: SKScene {
 //    }
 
     // MARK: - Touch Helpers
-    private func moveSpaceshipToClosestRemainingTouch(touches: Set<UITouch>?) {
-        guard let touches = remainingBackgroundTouches(in: touches),
-            let nextClosestTouch = touchClosestToSpaceship(touches: touches) else { return }
-        spaceship.moveHandle(to: nextClosestTouch.location(in: self))
-    }
+//    private func moveSpaceshipToClosestRemainingTouch(touches: Set<UITouch>?) {
+//        guard let touches = remainingBackgroundTouches(in: touches),
+//            let nextClosestTouch = touchClosestToSpaceship(touches: touches) else { return }
+//        spaceship.moveHandle(to: nextClosestTouch.location(in: self))
+//    }
     
 //    private func startShooting() {
 //        let shootingVector = CGVector(dx: -self.size.width, dy: self.size.height)
 //        spaceship.startShooting(with: shootingVector, zPosition: ZPositions.shot)
 //    }
-    
-    private func touchesSortedByDistanceToSpaceship(_ touches: Set<UITouch>?) -> [UITouch]? {
-        if let touches = touches {
-            return touches.sorted {
-                distanceFromSpaceship(to: $0.location(in: self))
-                    < distanceFromSpaceship(to: $1.location(in: self))
-            }
-        }
-        return nil
-    }
-    
-    private func touchClosestToSpaceship(touches: Set<UITouch>?) -> UITouch? {
-        if let touches = touches {
-            let orderedTouches = touchesSortedByDistanceToSpaceship(touches)
-            return orderedTouches?.first
-        }
-        return nil
-    }
-    
-    private func distanceFromSpaceship(to position: CGPoint) -> CGFloat {
-        return hypot(spaceship.handle.x - position.x,
-                     spaceship.handle.y - position.y)
-    }
-    
-    private func isOnBackground(_ location: CGPoint) -> Bool {
-        return !(fireButton.contains(location))
-            && !(pauseButton.contains(location))
-            && atPoint(location) != pauseLayer
-    }
-    
-    private func remainingBackgroundTouches(in touches: Set<UITouch>?) -> Set<UITouch>? {
-        guard let remainingTouches = touches else { return nil }
-        return remainingTouches.filter { isOnBackground($0.location(in: self)) && $0.phase != .ended }
-    }
+//
+//    private func touchesSortedByDistanceToSpaceship(_ touches: Set<UITouch>?) -> [UITouch]? {
+//        if let touches = touches {
+//            return touches.sorted {
+//                distanceFromSpaceship(to: $0.location(in: self))
+//                    < distanceFromSpaceship(to: $1.location(in: self))
+//            }
+//        }
+//        return nil
+//    }
+//    
+//    private func isOnBackground(_ location: CGPoint) -> Bool {
+//        return !(fireButton.contains(location))
+//            && !(pauseButton.contains(location))
+//            && atPoint(location) != pauseLayer
+//    }
+//    
+//    private func remainingBackgroundTouches(in touches: Set<UITouch>?) -> Set<UITouch>? {
+//        guard let remainingTouches = touches else { return nil }
+//        return remainingTouches.filter { isOnBackground($0.location(in: self)) && $0.phase != .ended }
+//    }
     
 //    private func fireButtonIsStillBeingTouched(touches: Set<UITouch>?) -> Bool {
 //        guard let touches = touches else { return false }
@@ -205,6 +201,41 @@ class GameScene: SKScene {
 //        }
 //        return false
 //    }
+}
+
+extension GameScene {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let positions = touches.map { $0.location(in: self) }
+        guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
+        spaceship.moveHandle(to: closestPosition)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let positions = touches.map { $0.location(in: self) }
+        guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
+        spaceship.moveHandle(to: closestPosition)
+    }
+    
+    private func isOnBackground(_ location: CGPoint) -> Bool {
+        return !(fireButton.contains(location))
+            && !(pauseButton.contains(location))
+            && atPoint(location) != pauseLayer
+    }
+    
+    private func closestPositionToSpaceship(of positions: [CGPoint]) -> CGPoint? {
+        guard var closestPosition = positions.first else { return nil }
+        for position in positions {
+            if distanceFromSpaceship(to: position) < distanceFromSpaceship(to: closestPosition) {
+                closestPosition = position
+            }
+        }
+        return closestPosition
+    }
+    
+    private func distanceFromSpaceship(to position: CGPoint) -> CGFloat {
+        return hypot(spaceship.handle.x - position.x,
+                     spaceship.handle.y - position.y)
+    }
 }
 
 extension GameScene: CornerButtonDelegate {
@@ -236,3 +267,30 @@ extension GameScene: PauseLayerDelegate {
         isPaused = false
     }
 }
+
+//extension GameScene: NavigationSpaceDelegate {
+//    func navigationTouches(at positions: [CGPoint], in sender: NavigationSpace) {
+//        guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
+//        spaceship.moveHandle(to: closestPosition)
+//    }
+//
+//    func navigationTouchesEnded() {
+//        spaceship.stopMoving()
+//    }
+//
+//    private func closestPositionToSpaceship(of positions: [CGPoint]) -> CGPoint? {
+//        guard var closestPosition = positions.first else { return nil }
+//        for position in positions {
+//            if distanceFromSpaceship(to: position) < distanceFromSpaceship(to: closestPosition) {
+//                closestPosition = position
+//            }
+//        }
+//        return closestPosition
+//    }
+//
+//    private func distanceFromSpaceship(to position: CGPoint) -> CGFloat {
+//        return hypot(spaceship.handle.x - position.x,
+//                     spaceship.handle.y - position.y)
+//    }
+//}
+

@@ -26,7 +26,11 @@ class Spaceship: SKSpriteNode, Sprite {
         let distance = hypot(handle.x - destination.x, handle.y - destination.y)
         let duration = TimeInterval(distance / (flyingSpeed * size.height))
         let move = SKAction.move(to: spaceshipDestination, duration: duration)
-        run(move)
+        run(move, withKey: "move")
+    }
+    
+    func stopMoving() {
+        removeAction(forKey: "move")
     }
     
     @objc func shoot(with vector: CGVector, zPosition: CGFloat) {

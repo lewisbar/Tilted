@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30336B421F27F94B00DAFC0D /* PauseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30336B411F27F94B00DAFC0D /* PauseLayer.swift */; };
+		30336B441F28094600DAFC0D /* NavigationSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30336B431F28094600DAFC0D /* NavigationSpace.swift */; };
 		3089B76E1F1807E200F7AAFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B76D1F1807E200F7AAFD /* AppDelegate.swift */; };
 		3089B7741F1807E200F7AAFD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7731F1807E200F7AAFD /* GameScene.swift */; };
 		3089B7761F1807E200F7AAFD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7751F1807E200F7AAFD /* GameViewController.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		30336B411F27F94B00DAFC0D /* PauseLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseLayer.swift; sourceTree = "<group>"; };
+		30336B431F28094600DAFC0D /* NavigationSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSpace.swift; sourceTree = "<group>"; };
 		3089B76A1F1807E200F7AAFD /* Tilted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tilted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3089B76D1F1807E200F7AAFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3089B7731F1807E200F7AAFD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */,
 				3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */,
 				3089B7AE1F1BC1E200F7AAFD /* Shot.sks */,
+				30336B431F28094600DAFC0D /* NavigationSpace.swift */,
 				3089B77A1F1807E200F7AAFD /* Assets.xcassets */,
 				3089B7A91F1AC13100F7AAFD /* Main.storyboard */,
 				3089B77C1F1807E200F7AAFD /* LaunchScreen.storyboard */,
@@ -289,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3089B7A61F1A1E3D00F7AAFD /* Spaceship.swift in Sources */,
+				30336B441F28094600DAFC0D /* NavigationSpace.swift in Sources */,
 				3089B7741F1807E200F7AAFD /* GameScene.swift in Sources */,
 				3089B7761F1807E200F7AAFD /* GameViewController.swift in Sources */,
 				3089B7B51F1C27F700F7AAFD /* UIColor+Abendhimmel.swift in Sources */,
