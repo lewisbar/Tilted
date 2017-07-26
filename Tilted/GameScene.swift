@@ -205,15 +205,45 @@ class GameScene: SKScene {
 
 extension GameScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let positions = touches.map { $0.location(in: self) }
-        guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
-        spaceship.moveHandle(to: closestPosition)
+        moveSpaceshipToClosestRemainingTouch(of: event?.allTouches)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let positions = touches.map { $0.location(in: self) }
+        //guard let allTouches = event?.allTouches else { return }
+        let backgroundTouches = touches.filter { isOnBackground($0.location(in: self)) }
+        let positions = backgroundTouches.map { $0.location(in: self) }
         guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
         spaceship.moveHandle(to: closestPosition)
+        
+        //moveSpaceshipToClosestRemainingTouch(of: event?.allTouches)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let allTouches = event?.allTouches else { return }
+        let remainingTouches = allTouches.filter { $0.phase != .ended }
+        if remainingTouches.isEmpty {
+            spaceship.stopMoving()
+        }
+    }
+    
+    private func moveSpaceshipToClosestRemainingTouch(of touches: Set<UITouch>?) {
+        guard let remaining = remainingBackgroundTouches(in: touches) else { return }
+        let positions = remaining.map { $0.location(in: self) }
+        guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
+        spaceship.moveHandle(to: closestPosition)
+    }
+//    private func moveSpaceshipToClosestRemainingTouch(touches: Set<UITouch>?) {
+//        let positions = touches.map { $0.location(in: self)}
+//        guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
+//        spaceship.moveHandle(to: closestPosition)
+////        guard let touches = remainingBackgroundTouches(in: touches),
+////            let nextClosestTouch = touchClosestToSpaceship(touches: touches) else { return }
+////        spaceship.moveHandle(to: nextClosestTouch.location(in: self))
+//    }
+//
+    private func remainingBackgroundTouches(in touches: Set<UITouch>?) -> Set<UITouch>? {
+        guard let remainingTouches = touches else { return nil }
+        return remainingTouches.filter { isOnBackground($0.location(in: self)) && $0.phase != .ended }
     }
     
     private func isOnBackground(_ location: CGPoint) -> Bool {
