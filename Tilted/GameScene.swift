@@ -160,27 +160,31 @@ class GameScene: SKScene {
 //    }
 
     // MARK: - Touch Helpers
-//    private func moveSpaceshipToClosestRemainingTouch(touches: Set<UITouch>?) {
-//        guard let touches = remainingBackgroundTouches(in: touches),
-//            let nextClosestTouch = touchClosestToSpaceship(touches: touches) else { return }
-//        spaceship.moveHandle(to: nextClosestTouch.location(in: self))
-//    }
+    private func moveSpaceshipToClosestRemainingTouch(of touches: Set<UITouch>?) {
+        guard let touches = remainingBackgroundTouches(in: touches),
+            let nextClosestTouch = touchClosestToSpaceship(of: touches) else { return }
+        spaceship.moveHandle(to: nextClosestTouch.location(in: self))
+    }
+    
+    private func touchClosestToSpaceship(of touches: Set<UITouch>?) -> UITouch? {
+        return touchesSortedByDistanceToSpaceship(touches)?.first ?? nil
+    }
     
 //    private func startShooting() {
 //        let shootingVector = CGVector(dx: -self.size.width, dy: self.size.height)
 //        spaceship.startShooting(with: shootingVector, zPosition: ZPositions.shot)
 //    }
 //
-//    private func touchesSortedByDistanceToSpaceship(_ touches: Set<UITouch>?) -> [UITouch]? {
-//        if let touches = touches {
-//            return touches.sorted {
-//                distanceFromSpaceship(to: $0.location(in: self))
-//                    < distanceFromSpaceship(to: $1.location(in: self))
-//            }
-//        }
-//        return nil
-//    }
-//    
+    private func touchesSortedByDistanceToSpaceship(_ touches: Set<UITouch>?) -> [UITouch]? {
+        if let touches = touches {
+            return touches.sorted {
+                distanceFromSpaceship(to: $0.location(in: self))
+                    < distanceFromSpaceship(to: $1.location(in: self))
+            }
+        }
+        return nil
+    }
+//
 //    private func isOnBackground(_ location: CGPoint) -> Bool {
 //        return !(fireButton.contains(location))
 //            && !(pauseButton.contains(location))
@@ -226,12 +230,12 @@ extension GameScene {
         }
     }
     
-    private func moveSpaceshipToClosestRemainingTouch(of touches: Set<UITouch>?) {
-        guard let remaining = remainingBackgroundTouches(in: touches) else { return }
-        let positions = remaining.map { $0.location(in: self) }
-        guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
-        spaceship.moveHandle(to: closestPosition)
-    }
+//    private func moveSpaceshipToClosestRemainingTouch(of touches: Set<UITouch>?) {
+//        guard let remaining = remainingBackgroundTouches(in: touches) else { return }
+//        let positions = remaining.map { $0.location(in: self) }
+//        guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
+//        spaceship.moveHandle(to: closestPosition)
+//    }
 //    private func moveSpaceshipToClosestRemainingTouch(touches: Set<UITouch>?) {
 //        let positions = touches.map { $0.location(in: self)}
 //        guard let closestPosition = closestPositionToSpaceship(of: positions) else { return }
