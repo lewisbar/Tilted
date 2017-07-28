@@ -44,8 +44,10 @@ class GameScene: SKScene {
         static let navigationSpace: CGFloat = 3
         static let pauseLayer: CGFloat = 4
     }
-    
-    // MARK: - Setup
+}
+
+// MARK: - Setup
+extension GameScene {
     func setupBackground() {
         backgrounds = MovingBackground.setup(in: self)
         for background in backgrounds {
@@ -93,7 +95,7 @@ class GameScene: SKScene {
     }
 }
 
-// MARK: - Moving the spaceship
+// MARK: - Moving the Spaceship
 extension GameScene {
     override func update(_ currentTime: TimeInterval) {
         spaceship.updateMovement()
@@ -136,6 +138,7 @@ extension GameScene {
     }
 }
 
+// MARK: - Corner Button Delegate
 extension GameScene: CornerButtonDelegate {
     func cornerButtonPressed(_ sender: CornerButton) {
         switch sender {
@@ -159,6 +162,7 @@ extension GameScene: CornerButtonDelegate {
     }
 }
 
+// MARK: - Pause Layer Delegate
 extension GameScene: PauseLayerDelegate {
     func pauseLayerTouched(_ sender: PauseLayer) {
         pauseLayerTouched = true
