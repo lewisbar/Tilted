@@ -103,9 +103,9 @@ class CornerButton: SKSpriteNode {
         for touch in allTouches {
             if touch.phase != .ended, self.contains(touch.location(in: self)) {
                 isPressed = true
-            } else {
-                isPressed = false
+                return
             }
         }
+        isPressed = false
     }
 }
