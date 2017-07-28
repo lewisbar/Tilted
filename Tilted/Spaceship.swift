@@ -22,6 +22,27 @@ class Spaceship: SKSpriteNode, Sprite {
         return CGPoint(x: x, y: y)
     }
     
+    init() {
+        let texture = SKTexture(imageNamed: "Spaceship")
+        super.init(texture: texture, color: .clear, size: texture.size())
+        physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+        setupExhaustFlame()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupExhaustFlame() {
+        exhaustFlame?.position = CGPoint(x: 0, y: -self.size.height / 2)
+        exhaustFlame?.zRotation = .pi
+        exhaustFlame?.zPosition = -1
+        self.addChild(exhaustFlame!)
+    }
+}
+
+// MARK: - Movement
+extension Spaceship {
     func updateMovement() {
         guard let target = flyingTarget else { return }
         let speed = flyingSpeed * size.height / 60
@@ -51,7 +72,10 @@ class Spaceship: SKSpriteNode, Sprite {
     func stopMoving() {
         flyingTarget = nil
     }
-    
+}
+
+// MARK: - Shooting
+extension Spaceship {
     @objc func shoot(with vector: CGVector, zPosition: CGFloat) {
         
         // Position in the spaceship's own coordinate system
@@ -84,23 +108,5 @@ class Spaceship: SKSpriteNode, Sprite {
     
     func stopShooting() {
         shootingTimer.invalidate()
-    }
-    
-    func setupExhaustFlame() {
-        exhaustFlame?.position = CGPoint(x: 0, y: -self.size.height / 2)
-        exhaustFlame?.zRotation = .pi
-        exhaustFlame?.zPosition = -1
-        self.addChild(exhaustFlame!)
-    }
-    
-    init() {
-        let texture = SKTexture(imageNamed: "Spaceship")
-        super.init(texture: texture, color: .clear, size: texture.size())
-        physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
-        setupExhaustFlame()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
