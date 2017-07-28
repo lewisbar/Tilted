@@ -24,11 +24,6 @@ class Spaceship: SKSpriteNode, Sprite {
     
     func updateMovement() {
         guard let target = flyingTarget else { return }
-        
-        //TODO: Change x and y so that the ship flies directly towards the goal. The dimension with bigger difference needs to change faster.
-        // 10 ship lengths per second means 10/60 ship lengths per frame
-        //let ratio = (target.x - handle.x) / (target.y - handle.y)
-        //let distance = hypot(handle.x - target.x, handle.y - target.y)
         let speed = flyingSpeed * size.height / 60
         let xDifference = abs(handle.x - target.x)
         let yDifference = abs(handle.y - target.y)
@@ -53,21 +48,8 @@ class Spaceship: SKSpriteNode, Sprite {
         }
     }
     
-    func moveHandle(to destination: CGPoint) {
-        let spaceshipDestination = CGPoint(x: destination.x - handleOffset.x, y: destination.y - handleOffset.y)
-        let distance = hypot(handle.x - destination.x, handle.y - destination.y)
-        let duration = TimeInterval(distance / (flyingSpeed * size.height))
-        let move = SKAction.move(to: spaceshipDestination, duration: duration)
-        //removeAction(forKey: "move")
-        run(move)//, withKey: "move")
-    }
-    
     func stopMoving() {
         flyingTarget = nil
-        //removeAction(forKey: "move")
-        //removeAllActions()
-//        let stop = SKAction.move(to: position, duration: 0)
-//        run(stop)
     }
     
     @objc func shoot(with vector: CGVector, zPosition: CGFloat) {
