@@ -30,25 +30,24 @@ class Spaceship: SKSpriteNode, Sprite {
         //let ratio = (target.x - handle.x) / (target.y - handle.y)
         //let distance = hypot(handle.x - target.x, handle.y - target.y)
         let speed = flyingSpeed * size.height / 60
-        let xDifference = handle.x - target.x
-        let yDifference = handle.y - target.y
+        let xDifference = abs(handle.x - target.x)
+        let yDifference = abs(handle.y - target.y)
         let combinedDifference = xDifference + yDifference
-        
-//        position.x += (speed / combinedDifference) * xDifference
-//        position.y += (speed / combinedDifference) * yDifference
-        
-        if target.x >= handle.x + flyingSpeed {
-            position.x += (speed / combinedDifference) * xDifference
-        } else if target.x < handle.x - flyingSpeed {
-            position.x -= (speed / combinedDifference) * xDifference
+        let xMovement = (speed / combinedDifference) * xDifference
+        let yMovement = (speed / combinedDifference) * yDifference
+
+        if target.x >= handle.x + xMovement {
+            position.x += xMovement
+        } else if target.x < handle.x - xMovement {
+            position.x -= xMovement
         } else {
             position.x = target.x - handleOffset.x
         }
 
-        if target.y >= handle.y + flyingSpeed {
-            position.y += (speed / combinedDifference) * yDifference
-        } else if target.y < handle.y - flyingSpeed {
-            position.y -= (speed / combinedDifference) * yDifference
+        if target.y >= handle.y + yMovement {
+            position.y += yMovement
+        } else if target.y < handle.y - yMovement {
+            position.y -= yMovement
         } else {
             position.y = target.y - handleOffset.y
         }

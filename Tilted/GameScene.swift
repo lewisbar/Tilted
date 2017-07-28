@@ -150,11 +150,11 @@ extension GameScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let allTouches = event?.allTouches else { return }
-        let remainingTouches = allTouches.filter { $0.phase != .ended }
-        guard let closestTouch = touchClosestToSpaceship(of: remainingTouches) else { return }
-        spaceship.flyingTarget = closestTouch.location(in: self)
-        if remainingTouches.isEmpty {
+        if let remainingTouches = remainingBackgroundTouches(in: event?.allTouches),
+            !remainingTouches.isEmpty,
+            let closestTouch = touchClosestToSpaceship(of: remainingTouches) {
+            spaceship.flyingTarget = closestTouch.location(in: self)
+        } else {
             spaceship.stopMoving()
         }
     }
