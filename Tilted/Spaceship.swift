@@ -12,6 +12,7 @@ class Spaceship: SKSpriteNode, Sprite {
     
     var healthPoints = 3
     var flyingSpeed: CGFloat = 10   // in spaceship lengths per second
+    var flyingTarget: CGPoint?
     let exhaustFlame = SKEmitterNode(fileNamed: "ExhaustFlame")
     var shootingTimer = Timer()
     var handleOffset = CGPoint(x: 0, y: 0)
@@ -21,16 +22,53 @@ class Spaceship: SKSpriteNode, Sprite {
         return CGPoint(x: x, y: y)
     }
     
+    func updateMovement() {
+        guard let target = flyingTarget else { return }
+        
+        //TODO: Change x and y so that the ship flies directly towards the goal. The dimension with bigger difference needs to change faster.
+        // 10 ship lengths per second means 10/60 ship lengths per frame
+        //let ratio = (target.x - handle.x) / (target.y - handle.y)
+        //let distance = hypot(handle.x - target.x, handle.y - target.y)
+        let speed = flyingSpeed * size.height / 60
+        let xDifference = handle.x - target.x
+        let yDifference = handle.y - target.y
+        let combinedDifference = xDifference + yDifference
+        
+//        position.x += (speed / combinedDifference) * xDifference
+//        position.y += (speed / combinedDifference) * yDifference
+        
+        if target.x >= handle.x + flyingSpeed {
+            position.x += (speed / combinedDifference) * xDifference
+        } else if target.x < handle.x - flyingSpeed {
+            position.x -= (speed / combinedDifference) * xDifference
+        } else {
+            position.x = target.x - handleOffset.x
+        }
+
+        if target.y >= handle.y + flyingSpeed {
+            position.y += (speed / combinedDifference) * yDifference
+        } else if target.y < handle.y - flyingSpeed {
+            position.y -= (speed / combinedDifference) * yDifference
+        } else {
+            position.y = target.y - handleOffset.y
+        }
+    }
+    
     func moveHandle(to destination: CGPoint) {
         let spaceshipDestination = CGPoint(x: destination.x - handleOffset.x, y: destination.y - handleOffset.y)
         let distance = hypot(handle.x - destination.x, handle.y - destination.y)
         let duration = TimeInterval(distance / (flyingSpeed * size.height))
         let move = SKAction.move(to: spaceshipDestination, duration: duration)
-        run(move, withKey: "move")
+        //removeAction(forKey: "move")
+        run(move)//, withKey: "move")
     }
     
     func stopMoving() {
-        removeAction(forKey: "move")
+        flyingTarget = nil
+        //removeAction(forKey: "move")
+        //removeAllActions()
+//        let stop = SKAction.move(to: position, duration: 0)
+//        run(stop)
     }
     
     @objc func shoot(with vector: CGVector, zPosition: CGFloat) {
