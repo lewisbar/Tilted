@@ -68,7 +68,7 @@ extension GameScene {
             CGPoint(x: buttonSize.width, y: 0)
         ]
         path.addLines(between: points)
-        backgroundArea.path = path
+        backgroundArea = BackgroundArea(path: path)
     }
     
     func setupSpaceship() {
@@ -139,9 +139,10 @@ extension GameScene {
     }
     
     private func isOnBackground(_ location: CGPoint) -> Bool {
-        return !(fireButton.contains(location))
-            && !(pauseButton.contains(location))
-            && atPoint(location) != pauseLayer
+        return backgroundArea.contains(location)
+//        return !(fireButton.contains(location))
+//            && !(pauseButton.contains(location))
+//            && atPoint(location) != pauseLayer
     }
     
     private func closestPositionToSpaceship(of positions: [CGPoint]) -> CGPoint? {
