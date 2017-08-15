@@ -11,6 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     var backgrounds: [SKSpriteNode]!
+    var backgroundArea: BackgroundArea!
     let spaceship = Spaceship()
     var fireButton: CornerButton!
     var pauseButton: CornerButton!
@@ -48,11 +49,26 @@ class GameScene: SKScene {
 
 // MARK: - Setup
 extension GameScene {
-    func setupBackground() {
+    func setupMovingBackground() {
         backgrounds = MovingBackground.setup(in: self)
         for background in backgrounds {
             background.zPosition = ZPositions.background
         }
+    }
+    
+    func setupBackgroundArea() {
+        let path = CGMutablePath()
+        let points = [
+            CGPoint(x: buttonSize.width, y: 0),
+            CGPoint(x: size.width, y: 0),
+            CGPoint(x: size.width, y: size.height - buttonSize.height),
+            CGPoint(x: size.width - buttonSize.width, y: size.height),
+            CGPoint(x: 0, y: size.height),
+            CGPoint(x: 0, y: buttonSize.height),
+            CGPoint(x: buttonSize.width, y: 0)
+        ]
+        path.addLines(between: points)
+        backgroundArea.path = path
     }
     
     func setupSpaceship() {
@@ -87,7 +103,8 @@ extension GameScene {
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        setupBackground()
+        setupMovingBackground()
+        setupBackgroundArea()
         setupFireButton()
         setupPauseButton()
         setupPauseLayer()
