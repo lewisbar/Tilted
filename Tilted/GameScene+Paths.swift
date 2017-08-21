@@ -14,8 +14,8 @@ extension GameScene {
         let c = size.bottomLeft
         let points = [
             c,
-            CGPoint(x: c.x + size.width, y: c.y),
-            CGPoint(x: c.x, y: c.y + size.height)
+            CGPoint(x: c.x + buttonSize.width, y: c.y),
+            CGPoint(x: c.x, y: c.y + buttonSize.height)
         ]
         path.addLines(between: points)
         return path
@@ -23,11 +23,11 @@ extension GameScene {
     
     var pauseButtonPath: CGPath {
         let path = CGMutablePath()
-        let c = size.bottomLeft
+        let c = size.topRight
         let points = [
             c,
-            CGPoint(x: c.x, y: c.y - size.height),
-            CGPoint(x: c.x - size.width, y: c.y)
+            CGPoint(x: c.x, y: c.y - buttonSize.height),
+            CGPoint(x: c.x - buttonSize.width, y: c.y)
         ]
         path.addLines(between: points)
         return path

@@ -11,7 +11,6 @@ import SpriteKit
 class GameScene: SKScene {
     
     var backgrounds: [SKSpriteNode]!
-    var backgroundArea: BackgroundArea!
     let spaceship = Spaceship()
     var pauseLayer: PauseLayer?
     var pauseLayerTouched = false
