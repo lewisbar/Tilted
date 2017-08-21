@@ -30,8 +30,8 @@ extension CGSize {
         return CGPoint(x: self.width, y: 0)
     }
     
-    // Returns radians
-    func lowerRightAngleOverDiagonal() -> CGFloat {
+    // Returns the angle in radians that is above the diagonal that goes from the lower right to the upper left corner, so the direction of spaceship and enemies fits the screen dimensions.
+    func lowerRightAngleAboveDiagonal() -> CGFloat {
         let a = width
         let b = height
         let c = sqrt(a * a + b * b)

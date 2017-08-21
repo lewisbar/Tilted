@@ -11,9 +11,13 @@ import XCTest
 
 class TiltedTests: XCTestCase {
     
-    func test_lowerRightAngleOverDiagonal() {
+    func test_lowerRightAngleAboveDiagonal() {
         let size = CGSize(width: 300, height: 700)
-        let angle = Int(size.lowerRightAngleOverDiagonal() * 180 / .pi)    // Convert to degrees
+        let angle = Int(size.lowerRightAngleAboveDiagonal() * 180 / .pi)    // Convert to degrees
         XCTAssertEqual(angle, 23)
     }
+    
+    
 }
+
+

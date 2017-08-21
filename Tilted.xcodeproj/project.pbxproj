@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		30336B421F27F94B00DAFC0D /* PauseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30336B411F27F94B00DAFC0D /* PauseLayer.swift */; };
 		306BECCD1F43096000FD9724 /* BackgroundArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306BECCC1F43096000FD9724 /* BackgroundArea.swift */; };
+		306BECCF1F43356100FD9724 /* GameScene+TouchHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306BECCE1F43356100FD9724 /* GameScene+TouchHandling.swift */; };
 		3089B76E1F1807E200F7AAFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B76D1F1807E200F7AAFD /* AppDelegate.swift */; };
 		3089B7741F1807E200F7AAFD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7731F1807E200F7AAFD /* GameScene.swift */; };
 		3089B7761F1807E200F7AAFD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7751F1807E200F7AAFD /* GameViewController.swift */; };
@@ -25,6 +26,7 @@
 		3089B7AF1F1BC1E200F7AAFD /* Shot.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7AE1F1BC1E200F7AAFD /* Shot.sks */; };
 		3089B7B11F1C1BC000F7AAFD /* CornerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7B01F1C1BC000F7AAFD /* CornerButton.swift */; };
 		3089B7B51F1C27F700F7AAFD /* UIColor+Abendhimmel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */; };
+		30E02DDF1F49DF9D0019495E /* GameScene+Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,7 @@
 /* Begin PBXFileReference section */
 		30336B411F27F94B00DAFC0D /* PauseLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseLayer.swift; sourceTree = "<group>"; };
 		306BECCC1F43096000FD9724 /* BackgroundArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundArea.swift; sourceTree = "<group>"; };
+		306BECCE1F43356100FD9724 /* GameScene+TouchHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+TouchHandling.swift"; sourceTree = "<group>"; };
 		3089B76A1F1807E200F7AAFD /* Tilted.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tilted.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3089B76D1F1807E200F7AAFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3089B7731F1807E200F7AAFD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 		3089B7AE1F1BC1E200F7AAFD /* Shot.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Shot.sks; sourceTree = "<group>"; };
 		3089B7B01F1C1BC000F7AAFD /* CornerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerButton.swift; sourceTree = "<group>"; };
 		3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Abendhimmel.swift"; sourceTree = "<group>"; };
+		30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Paths.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 			children = (
 				3089B76D1F1807E200F7AAFD /* AppDelegate.swift */,
 				3089B7731F1807E200F7AAFD /* GameScene.swift */,
+				306BECCE1F43356100FD9724 /* GameScene+TouchHandling.swift */,
+				30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */,
 				3089B7751F1807E200F7AAFD /* GameViewController.swift */,
 				3089B7A31F19771D00F7AAFD /* MovingBackground.swift */,
 				30336B411F27F94B00DAFC0D /* PauseLayer.swift */,
@@ -294,6 +300,7 @@
 				3089B7A61F1A1E3D00F7AAFD /* Spaceship.swift in Sources */,
 				3089B7741F1807E200F7AAFD /* GameScene.swift in Sources */,
 				3089B7761F1807E200F7AAFD /* GameViewController.swift in Sources */,
+				306BECCF1F43356100FD9724 /* GameScene+TouchHandling.swift in Sources */,
 				3089B7B51F1C27F700F7AAFD /* UIColor+Abendhimmel.swift in Sources */,
 				3089B7A21F1965BE00F7AAFD /* CGSize+Extension.swift in Sources */,
 				3089B7A81F1A1E9000F7AAFD /* Sprite.swift in Sources */,
@@ -301,6 +308,7 @@
 				3089B7B11F1C1BC000F7AAFD /* CornerButton.swift in Sources */,
 				306BECCD1F43096000FD9724 /* BackgroundArea.swift in Sources */,
 				3089B76E1F1807E200F7AAFD /* AppDelegate.swift in Sources */,
+				30E02DDF1F49DF9D0019495E /* GameScene+Paths.swift in Sources */,
 				3089B7A41F19771D00F7AAFD /* MovingBackground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
