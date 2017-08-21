@@ -63,12 +63,14 @@ extension GameScene {
     
     func setupFireButton() {
         let fireButton = SKShapeNode(path: fireButtonPath)
+        fireButton.fillColor = .treePoppy
         fireButton.zPosition = ZPositions.buttons
         addChild(fireButton)
     }
     
     func setupPauseButton() {
         let pauseButton = SKShapeNode(path: pauseButtonPath)
+        pauseButton.fillColor = .treePoppy
         pauseButton.zPosition = ZPositions.buttons
         addChild(pauseButton)
     }
