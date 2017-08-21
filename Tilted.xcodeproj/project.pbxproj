@@ -119,19 +119,11 @@
 		3089B76C1F1807E200F7AAFD /* Tilted */ = {
 			isa = PBXGroup;
 			children = (
-				3089B76D1F1807E200F7AAFD /* AppDelegate.swift */,
-				3089B7731F1807E200F7AAFD /* GameScene.swift */,
-				306BECCE1F43356100FD9724 /* GameScene+TouchHandling.swift */,
-				30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */,
-				3089B7751F1807E200F7AAFD /* GameViewController.swift */,
-				3089B7A31F19771D00F7AAFD /* MovingBackground.swift */,
-				30336B411F27F94B00DAFC0D /* PauseLayer.swift */,
-				3089B7A51F1A1E3D00F7AAFD /* Spaceship.swift */,
-				3089B7A71F1A1E9000F7AAFD /* Sprite.swift */,
-				3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */,
-				3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */,
-				3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */,
-				3089B7AE1F1BC1E200F7AAFD /* Shot.sks */,
+				30E02DE41F4B60810019495E /* Basic */,
+				30E02DE31F4B606C0019495E /* GameScene */,
+				30E02DE21F4B60500019495E /* Elements */,
+				30E02DE11F4B60370019495E /* General */,
+				30E02DE01F4B600A0019495E /* Emitters */,
 				3089B77A1F1807E200F7AAFD /* Assets.xcassets */,
 				3089B7A91F1AC13100F7AAFD /* Main.storyboard */,
 				3089B77C1F1807E200F7AAFD /* LaunchScreen.storyboard */,
@@ -156,6 +148,54 @@
 				3089B7951F1807E300F7AAFD /* Info.plist */,
 			);
 			path = TiltedUITests;
+			sourceTree = "<group>";
+		};
+		30E02DE01F4B600A0019495E /* Emitters */ = {
+			isa = PBXGroup;
+			children = (
+				3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */,
+				3089B7AE1F1BC1E200F7AAFD /* Shot.sks */,
+			);
+			path = Emitters;
+			sourceTree = "<group>";
+		};
+		30E02DE11F4B60370019495E /* General */ = {
+			isa = PBXGroup;
+			children = (
+				3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */,
+				3089B7A11F1965BE00F7AAFD /* CGSize+Extension.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		30E02DE21F4B60500019495E /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				3089B7A31F19771D00F7AAFD /* MovingBackground.swift */,
+				30336B411F27F94B00DAFC0D /* PauseLayer.swift */,
+				3089B7A51F1A1E3D00F7AAFD /* Spaceship.swift */,
+				3089B7A71F1A1E9000F7AAFD /* Sprite.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		30E02DE31F4B606C0019495E /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				3089B7731F1807E200F7AAFD /* GameScene.swift */,
+				306BECCE1F43356100FD9724 /* GameScene+TouchHandling.swift */,
+				30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
+		30E02DE41F4B60810019495E /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				3089B76D1F1807E200F7AAFD /* AppDelegate.swift */,
+				3089B7751F1807E200F7AAFD /* GameViewController.swift */,
+			);
+			path = Basic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
