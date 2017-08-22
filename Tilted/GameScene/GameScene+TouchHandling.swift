@@ -28,7 +28,6 @@ extension GameScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // TODO: If the last touch leaves the fire button, stop shooting (using "previousLocation"
         for touch in touches {
             let location = touch.location(in: self)
             if fireButtonPath.contains(location) {
@@ -36,6 +35,8 @@ extension GameScene {
                 spaceship.startShooting(with: shootingVector, zPosition: ZPositions.shot)
             } else if pauseButtonPath.contains(location) {
                 isPaused = true
+            } else if fireButtonPath.contains(touch.previousLocation(in: self)) {
+                stopShootingIfNoFireButtonTouches(event: event)
             }
         }
         moveSpaceshipToClosestBackgroundTouch(event: event)
@@ -45,15 +46,7 @@ extension GameScene {
         for touch in touches {
             let location = touch.location(in: self)
             if fireButtonPath.contains(location) {
-                // Stop shooting if there are no touches left on the fire button
-                guard let allTouches = event?.allTouches else {
-                    spaceship.stopShooting()
-                    return
-                }
-                let remainingFireButtonTouches = allTouches.filter { $0.phase != .ended && fireButtonPath.contains($0.location(in: self)) }
-                if remainingFireButtonTouches.isEmpty {
-                    spaceship.stopShooting()
-                }
+                stopShootingIfNoFireButtonTouches(event: event)
             }
         }
         moveSpaceshipToClosestBackgroundTouch(event: event)
@@ -76,5 +69,16 @@ extension GameScene {
     private func distanceFromSpaceship(to position: CGPoint) -> CGFloat {
         return hypot(spaceship.handle.x - position.x,
                      spaceship.handle.y - position.y)
+    }
+    
+    private func stopShootingIfNoFireButtonTouches(event: UIEvent?) {
+        guard let allTouches = event?.allTouches else {
+            spaceship.stopShooting()
+            return
+        }
+        let remainingFireButtonTouches = allTouches.filter { $0.phase != .ended && fireButtonPath.contains($0.location(in: self)) }
+        if remainingFireButtonTouches.isEmpty {
+            spaceship.stopShooting()
+        }
     }
 }
