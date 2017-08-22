@@ -17,7 +17,14 @@ class TiltedTests: XCTestCase {
         XCTAssertEqual(angle, 23)
     }
     
-    
+    func test_spaceshipSpeedIsInSpaceshipLengthsPerSecond() {
+        let ship = Spaceship()
+        ship.position = .zero
+        ship.flyingTarget = CGPoint(x: 0, y: 200)
+        ship.flyingSpeed = 10
+        ship.updateMovement()
+        XCTAssertEqual(ship.position, CGPoint(x: 0, y: ship.size.height / 6))
+    }
 }
 
 
