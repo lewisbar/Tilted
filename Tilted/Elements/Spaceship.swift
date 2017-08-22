@@ -11,9 +11,13 @@ import SpriteKit
 class Spaceship: SKSpriteNode, Sprite {
     
     var healthPoints = 3
-    var flyingSpeed: CGFloat = 10   // in spaceship lengths per second
-    var flyingTarget: CGPoint?
+    var flyingSpeed: CGFloat = 10 {  // in spaceship lengths per second; 10-30 recommended
+        didSet {
+            exhaustFlame?.particleSpeed = flyingSpeed * speedToFlameLengthFactor
+        }
+    }
     let exhaustFlame = SKEmitterNode(fileNamed: "ExhaustFlame")
+    let speedToFlameLengthFactor: CGFloat = 10
     var shootingTimer = Timer()
     var handleOffset = CGPoint(x: 0, y: 0)
     var handle: CGPoint {
@@ -21,6 +25,7 @@ class Spaceship: SKSpriteNode, Sprite {
         let y = self.position.y + handleOffset.y
         return CGPoint(x: x, y: y)
     }
+    var flyingTarget: CGPoint?
     
     init() {
         let texture = SKTexture(imageNamed: "Spaceship")
@@ -37,6 +42,7 @@ class Spaceship: SKSpriteNode, Sprite {
         exhaustFlame?.position = CGPoint(x: 0, y: -self.size.height / 2)
         exhaustFlame?.zRotation = .pi
         exhaustFlame?.zPosition = -1
+        exhaustFlame?.particleSpeed = flyingSpeed * speedToFlameLengthFactor
         self.addChild(exhaustFlame!)
     }
 }
