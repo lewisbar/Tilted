@@ -86,7 +86,6 @@ extension GameScene {
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         setupMovingBackground()
-        // setupBackgroundArea()
         setupFireButton()
         setupPauseButton()
         setupPauseLayer()
