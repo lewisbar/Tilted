@@ -50,6 +50,7 @@ class Spaceship: SKSpriteNode, Sprite {
 // MARK: - Movement
 extension Spaceship {
     func updateMovement() {
+        // TODO: Make the ship lean to the side to which it moves
         guard let target = flyingTarget else { return }
         let speed = flyingSpeed * size.height / 60
         let xDifference = abs(handle.x - target.x)
