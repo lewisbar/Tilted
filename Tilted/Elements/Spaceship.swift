@@ -10,6 +10,12 @@ import SpriteKit
 
 class Spaceship: SKSpriteNode, Sprite {
     
+    struct Textures {
+        static let normal = SKTexture(imageNamed: "Spaceship")
+        static let leanLeft = SKTexture(imageNamed: "Spaceship Leaning Left")
+        static let leanRight = SKTexture(imageNamed: "Spaceship Leaning Right")
+    }
+    
     var healthPoints = 3
     var flyingSpeed: CGFloat = 10 {  // in spaceship lengths per second; 10-30 recommended
         didSet {
@@ -26,9 +32,17 @@ class Spaceship: SKSpriteNode, Sprite {
         return CGPoint(x: x, y: y)
     }
     var flyingTarget: CGPoint?
+    override var texture: SKTexture? {
+        didSet {
+            if let texture = texture {
+                size = texture.size()
+                physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+            }
+        }
+    }
     
     init() {
-        let texture = SKTexture(imageNamed: "Spaceship")
+        let texture = Textures.normal
         super.init(texture: texture, color: .clear, size: texture.size())
         physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
         setupExhaustFlame()
@@ -59,6 +73,15 @@ extension Spaceship {
         let xMovement = (speed / combinedDifference) * xDifference
         let yMovement = (speed / combinedDifference) * yDifference
 
+        // Lean to the side
+        if (handle.x - target.x) > 20 {
+            leanLeft()
+        } else if (handle.x - target.x) < -20 {
+            leanRight()
+        } else {
+            straighten()
+        }
+        
         if target.x >= handle.x + xMovement {
             position.x += xMovement
         } else if target.x < handle.x - xMovement {
@@ -78,6 +101,27 @@ extension Spaceship {
     
     func stopMoving() {
         flyingTarget = nil
+    }
+    
+    func leanLeft() {
+        if texture != Textures.leanLeft {
+            texture = Textures.leanLeft
+            print("lean left")
+        }
+    }
+    
+    func leanRight() {
+        if texture != Textures.leanRight {
+            texture = Textures.leanRight
+            print("lean right")
+        }
+    }
+    
+    func straighten() {
+        if texture != Textures.normal {
+            texture = Textures.normal
+            print("straighten")
+        }
     }
 }
 
