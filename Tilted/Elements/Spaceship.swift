@@ -76,6 +76,7 @@ extension Spaceship {
         let yMovement = (speed / combinedDifference) * yDifference
 
         // Lean to the side
+        // TODO: Uses the scene's coordinate system, which is not rotated.
         if (handle.x - target.x) > 20 {
             leanLeft()
         } else if (handle.x - target.x) < -20 {
