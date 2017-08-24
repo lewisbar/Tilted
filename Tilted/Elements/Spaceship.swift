@@ -116,21 +116,18 @@ extension Spaceship {
     func leanLeft() {
         if texture != Textures.leanLeft {
             texture = Textures.leanLeft
-            print("lean left")
         }
     }
     
     func leanRight() {
         if texture != Textures.leanRight {
             texture = Textures.leanRight
-            print("lean right")
         }
     }
     
     func straighten() {
         if texture != Textures.normal {
             texture = Textures.normal
-            print("straighten")
         }
     }
 }
