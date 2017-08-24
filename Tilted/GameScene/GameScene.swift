@@ -11,7 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     var backgrounds: [SKSpriteNode]!
-    let spaceship = Spaceship()
+    lazy var spaceship = Spaceship(in: self)
     var pauseLayer: PauseLayer?
     var pauseLayerTouched = false
     lazy var buttonSize = CGSize(width: size.width / 4, height: size.height / 4)

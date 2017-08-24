@@ -16,6 +16,7 @@ class Spaceship: SKSpriteNode, Sprite {
         static let leanRight = SKTexture(imageNamed: "Spaceship Leaning Right")
     }
     
+    let parentScene: SKScene
     var healthPoints = 3
     var flyingSpeed: CGFloat = 10 {  // in spaceship lengths per second; 10-30 recommended
         didSet {
@@ -41,7 +42,8 @@ class Spaceship: SKSpriteNode, Sprite {
         }
     }
     
-    init() {
+    init(in scene: SKScene) {
+        self.parentScene = scene
         let texture = Textures.normal
         super.init(texture: texture, color: .clear, size: texture.size())
         physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
@@ -68,23 +70,27 @@ extension Spaceship {
             straighten()
             return
         }
+
+        // Lean to the side
+        let targetInShipCoords = convert(target, from: parentScene)
+        let handleInShipCoords = convert(handle, from: parentScene)
+        if (handleInShipCoords.x - targetInShipCoords.x) > 40 {
+            leanLeft()
+        } else if (handleInShipCoords.x - targetInShipCoords.x) < -40 {
+            leanRight()
+        } else {
+            straighten()
+        }
+        
+        // Preparation for movement
         let speed = flyingSpeed * size.height / 60
         let xDifference = abs(handle.x - target.x)
         let yDifference = abs(handle.y - target.y)
         let combinedDifference = xDifference + yDifference
         let xMovement = (speed / combinedDifference) * xDifference
         let yMovement = (speed / combinedDifference) * yDifference
-
-        // Lean to the side
-        // TODO: Uses the scene's coordinate system, which is not rotated.
-        if (handle.x - target.x) > 20 {
-            leanLeft()
-        } else if (handle.x - target.x) < -20 {
-            leanRight()
-        } else {
-            straighten()
-        }
         
+        // x movement
         if target.x >= handle.x + xMovement {
             position.x += xMovement
         } else if target.x < handle.x - xMovement {
@@ -93,6 +99,7 @@ extension Spaceship {
             position.x = target.x - handleOffset.x
         }
 
+        // y movement
         if target.y >= handle.y + yMovement {
             position.y += yMovement
         } else if target.y < handle.y - yMovement {
