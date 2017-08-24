@@ -74,9 +74,9 @@ extension Spaceship {
         // Lean to the side
         let targetInShipCoords = convert(target, from: parentScene)
         let handleInShipCoords = convert(handle, from: parentScene)
-        if (handleInShipCoords.x - targetInShipCoords.x) > 40 {
+        if (handleInShipCoords.x - targetInShipCoords.x) > (size.width) {
             leanLeft()
-        } else if (handleInShipCoords.x - targetInShipCoords.x) < -40 {
+        } else if (handleInShipCoords.x - targetInShipCoords.x) < -(size.width) {
             leanRight()
         } else {
             straighten()
