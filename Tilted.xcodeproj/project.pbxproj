@@ -24,6 +24,7 @@
 		3089B7AD1F1ADB1000F7AAFD /* ExhaustFlame.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */; };
 		3089B7AF1F1BC1E200F7AAFD /* Shot.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7AE1F1BC1E200F7AAFD /* Shot.sks */; };
 		3089B7B51F1C27F700F7AAFD /* UIColor+Abendhimmel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */; };
+		30B4FFAE1F541E3600813D7C /* Whirl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B4FFAD1F541E3500813D7C /* Whirl.swift */; };
 		30E02DDF1F49DF9D0019495E /* GameScene+Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		3089B7AC1F1ADB1000F7AAFD /* ExhaustFlame.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExhaustFlame.sks; sourceTree = "<group>"; };
 		3089B7AE1F1BC1E200F7AAFD /* Shot.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Shot.sks; sourceTree = "<group>"; };
 		3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Abendhimmel.swift"; sourceTree = "<group>"; };
+		30B4FFAD1F541E3500813D7C /* Whirl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Whirl.swift; sourceTree = "<group>"; };
 		30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Paths.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,8 +175,9 @@
 			children = (
 				3089B7A31F19771D00F7AAFD /* MovingBackground.swift */,
 				30336B411F27F94B00DAFC0D /* PauseLayer.swift */,
-				3089B7A51F1A1E3D00F7AAFD /* Spaceship.swift */,
 				3089B7A71F1A1E9000F7AAFD /* Sprite.swift */,
+				3089B7A51F1A1E3D00F7AAFD /* Spaceship.swift */,
+				30B4FFAD1F541E3500813D7C /* Whirl.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				3089B7A21F1965BE00F7AAFD /* CGSize+Extension.swift in Sources */,
 				3089B7A81F1A1E9000F7AAFD /* Sprite.swift in Sources */,
 				30336B421F27F94B00DAFC0D /* PauseLayer.swift in Sources */,
+				30B4FFAE1F541E3600813D7C /* Whirl.swift in Sources */,
 				3089B76E1F1807E200F7AAFD /* AppDelegate.swift in Sources */,
 				30E02DDF1F49DF9D0019495E /* GameScene+Paths.swift in Sources */,
 				3089B7A41F19771D00F7AAFD /* MovingBackground.swift in Sources */,
