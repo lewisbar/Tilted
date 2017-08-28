@@ -15,6 +15,7 @@ class GameScene: SKScene {
     var pauseLayer: PauseLayer?
     var pauseLayerTouched = false
     lazy var buttonSize = CGSize(width: size.width / 4, height: size.height / 4)
+    var whirlTimer = Timer()
     
     override var isPaused: Bool {
         didSet {
@@ -83,6 +84,17 @@ extension GameScene {
         pauseLayer?.delegate = self
     }
     
+    @objc func addWhirl() {
+        let whirl = Whirl()
+        setupNode(whirl, name: "whirl")
+        self.addChild(whirl)
+        whirl.startMoving()
+    }
+    
+    func startWhirlTimer() {
+        whirlTimer = Timer.scheduledTimer(timeInterval: 5.6, target: self, selector: #selector(addWhirl), userInfo: nil, repeats: true)
+    }
+    
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         setupMovingBackground()
@@ -90,6 +102,7 @@ extension GameScene {
         setupPauseButton()
         setupPauseLayer()
         setupSpaceship()
+        startWhirlTimer()
     }
 }
 
