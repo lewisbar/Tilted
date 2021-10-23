@@ -52,7 +52,6 @@ extension GameScene {
         moveSpaceshipToClosestBackgroundTouch(event: event)
     }
         
-    
     // Helpers
     private func moveSpaceshipToClosestBackgroundTouch(event: UIEvent?) {
         guard let allTouches = event?.allTouches else { return }

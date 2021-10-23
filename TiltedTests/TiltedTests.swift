@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SpriteKit
 @testable import Tilted
 
 class TiltedTests: XCTestCase {
@@ -18,7 +19,7 @@ class TiltedTests: XCTestCase {
     }
     
     func test_spaceshipSpeedIsInSpaceshipLengthsPerSecond() {
-        let ship = Spaceship()
+        let ship = Spaceship(in: SKScene())
         ship.position = .zero
         ship.flyingTarget = CGPoint(x: 0, y: 200)
         ship.flyingSpeed = 10
