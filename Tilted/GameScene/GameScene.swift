@@ -85,8 +85,12 @@ extension GameScene {
     }
     
     @objc func addWhirl() {
+        print("Adding new whirl")
         let whirl = Whirl()
-        setupNode(whirl, name: "whirl")
+        // setupNode(whirl, name: "whirl")
+        whirl.position = CGPoint(x: 0, y: self.size.height)
+        whirl.zRotation = self.size.lowerRightAngleAboveDiagonal()
+        whirl.zPosition = ZPositions.spaceship
         self.addChild(whirl)
         whirl.startMoving()
     }

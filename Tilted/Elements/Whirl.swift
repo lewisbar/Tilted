@@ -37,8 +37,10 @@ class Whirl: SKSpriteNode, Sprite {
         // Travel
         let xTravelDistance = size.width * 0.1
         let yTravelDistance = size.height * 0.5
-        let moveDownAndRight = SKAction.moveBy(x: xTravelDistance, y: -yTravelDistance, duration: 0.4)
-        let moveDownAndLeft = SKAction.moveBy(x: -xTravelDistance, y: -yTravelDistance, duration: 0.4)
+        let xTiltCompensation = yTravelDistance / size.height * size.width
+        let yTiltCompensation = xTravelDistance / size.width * size.height
+        let moveDownAndRight = SKAction.moveBy(x:  xTravelDistance + xTiltCompensation, y: -(yTravelDistance + yTiltCompensation), duration: 0.4)
+        let moveDownAndLeft = SKAction.moveBy(x: -xTravelDistance + xTiltCompensation, y: -(yTravelDistance + yTiltCompensation), duration: 0.4)
         let deleteWhenLeaving = SKAction.perform(#selector(deleteWhenLeavingScreen), onTarget: self)
         let wiggle = SKAction.sequence([moveDownAndLeft, moveDownAndRight, deleteWhenLeaving])
         run(SKAction.repeatForever(wiggle), withKey: "wiggle")

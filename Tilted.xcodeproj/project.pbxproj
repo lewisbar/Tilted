@@ -25,8 +25,8 @@
 		3089B7AF1F1BC1E200F7AAFD /* Shot.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3089B7AE1F1BC1E200F7AAFD /* Shot.sks */; };
 		3089B7B51F1C27F700F7AAFD /* UIColor+Abendhimmel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */; };
 		30B4FFAE1F541E3600813D7C /* Whirl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B4FFAD1F541E3500813D7C /* Whirl.swift */; };
-		30B4FFB11F542BC500813D7C /* GameScene+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B4FFAF1F542BC400813D7C /* GameScene+Settings.swift */; };
 		30E02DDF1F49DF9D0019495E /* GameScene+Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */; };
+		7C0CB7C0277E5A1500B4E8DC /* GameScene+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0CB7BF277E5A1500B4E8DC /* GameScene+Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +71,8 @@
 		3089B7AE1F1BC1E200F7AAFD /* Shot.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Shot.sks; sourceTree = "<group>"; };
 		3089B7B41F1C27F600F7AAFD /* UIColor+Abendhimmel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Abendhimmel.swift"; sourceTree = "<group>"; };
 		30B4FFAD1F541E3500813D7C /* Whirl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Whirl.swift; sourceTree = "<group>"; };
-		30B4FFAF1F542BC400813D7C /* GameScene+Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GameScene+Settings.swift"; path = "../../../../GitHub Repos/SpaceShooter/SpaceShooter/GameScene/GameScene+Settings.swift"; sourceTree = "<group>"; };
 		30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Paths.swift"; sourceTree = "<group>"; };
+		7C0CB7BF277E5A1500B4E8DC /* GameScene+Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameScene+Settings.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,7 +190,7 @@
 				3089B7731F1807E200F7AAFD /* GameScene.swift */,
 				306BECCE1F43356100FD9724 /* GameScene+TouchHandling.swift */,
 				30E02DDE1F49DF9D0019495E /* GameScene+Paths.swift */,
-				30B4FFAF1F542BC400813D7C /* GameScene+Settings.swift */,
+				7C0CB7BF277E5A1500B4E8DC /* GameScene+Settings.swift */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -348,7 +348,7 @@
 				30B4FFAE1F541E3600813D7C /* Whirl.swift in Sources */,
 				3089B76E1F1807E200F7AAFD /* AppDelegate.swift in Sources */,
 				30E02DDF1F49DF9D0019495E /* GameScene+Paths.swift in Sources */,
-				30B4FFB11F542BC500813D7C /* GameScene+Settings.swift in Sources */,
+				7C0CB7C0277E5A1500B4E8DC /* GameScene+Settings.swift in Sources */,
 				3089B7A41F19771D00F7AAFD /* MovingBackground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
